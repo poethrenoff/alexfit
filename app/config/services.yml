@@ -1,0 +1,67 @@
+# Learn more about services, parameters and containers at
+# http://symfony.com/doc/current/service_container.html
+parameters:
+    product_picture_upload_directory: '%kernel.root_dir%/../web/upload/product/'
+    product_picture_upload_alias    : '/upload/product/'
+    category_upload_directory: '%kernel.root_dir%/../web/upload/category/'
+    category_upload_alias    : '/upload/category/'
+
+services:
+#    service_name:
+#        class: AppBundle\Directory\ClassName
+#        arguments: ["@another_service_name", "plain_value", "%parameter_name%"]
+
+    admin.text:
+        class: AppBundle\Admin\TextAdmin
+        arguments: [~, AppBundle\Entity\Text, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: Тексты, group: Контент }
+            
+    admin.article:
+        class: AppBundle\Admin\ArticleAdmin
+        arguments: [~, AppBundle\Entity\Article, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: Статьи, group: Контент }
+    
+    admin.brand:
+        class: AppBundle\Admin\BrandAdmin
+        arguments: [~, AppBundle\Entity\Brand, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: Производители, group: Каталог }
+
+    admin.catalogue:
+        class: AppBundle\Admin\CatalogueAdmin
+        arguments: [~, AppBundle\Entity\Catalogue, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: Группы, group: Каталог }
+        calls:
+            - [ addChild, ['@admin.category'] ]
+
+    admin.category:
+        class: AppBundle\Admin\CategoryAdmin
+        arguments: [~, AppBundle\Entity\Category, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: Категории, group: Каталог }
+        calls:
+            - [ addChild, ['@admin.product'] ]
+
+    admin.product:
+        class: AppBundle\Admin\ProductAdmin
+        arguments: [~, AppBundle\Entity\Product, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: Товары, group: Каталог }
+        calls:
+            - [ addChild, ['@admin.product_picture'] ]
+            
+    admin.product_picture:
+        class: AppBundle\Admin\ProductPictureAdmin
+        arguments: [~, AppBundle\Entity\ProductPicture, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: Изображения, group: Каталог }
+
+    admin.preference:
+        class: AppBundle\Admin\PreferenceAdmin
+        arguments: [~, AppBundle\Entity\Preference, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: Настройки, group: Система }
+
