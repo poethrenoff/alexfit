@@ -2,12 +2,11 @@
 
 namespace AppBundle\Admin;
 
-use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 
-class ProductPictureAdmin extends AbstractAdmin
+class ProductPictureAdmin extends UploadAdmin
 {
     protected $parentAssociationMapping = 'picture_product';
 
@@ -18,18 +17,18 @@ class ProductPictureAdmin extends AbstractAdmin
 
     protected function configureFormFields(FormMapper $formMapper)
     {
-        $fileFieldOptions = array('required' => false, 'label' => 'Изображение');
-
-        if (($image = $this->getSubject()) && ($webPath = $image->getPictureImage())) {
-            $fileFieldOptions['help'] = '<img src="' . $webPath . '" style="max-width: 150px; max-height: 150px" />';
+        $imageOptions = array('label' => 'Изображение', 'data_class' => null);
+        if (($subject = $this->getSubject()) && ($webPath = $subject->getPictureImage())) {
+            $imageOptions['help'] = '<img src="' . $webPath . '" style="max-width: 150px; max-height: 150px" />';;
+            $imageOptions['required'] = false;
         }
-
+        
         $formMapper
             ->add('picture_product', 'entity', array(
                 'class' => 'AppBundle\Entity\Product',
                 'label' => 'Товар'
             ))
-            ->add('file', 'file', $fileFieldOptions)
+            ->add('picture_image_file', 'file', $imageOptions)
             ->add('picture_order', 'integer', array('label' => 'Порядок'));
     }
 
@@ -48,25 +47,17 @@ class ProductPictureAdmin extends AbstractAdmin
             ->addIdentifier('picture_image', null, array('label' => 'Изображение'))
             ->add('picture_order', null, array('label' => 'Порядок', 'editable' => true));
     }
-
-    public function prePersist($image)
-    {
-        $this->manageFileUpload($image);
-    }
-
-    public function preUpdate($image)
-    {
-        $this->manageFileUpload($image);
-    }
-
-    public function manageFileUpload($image)
+    
+    public function configureUploadFields()
     {
         $container = $this->getConfigurationPool()->getContainer();
-
-        $image->setUploadDirectory($container->getParameter('product_picture_upload_directory'));
-        $image->setUploadAlias($container->getParameter('product_picture_upload_alias'));
-
-        $image->upload();
+        
+        $this
+            ->addUploadField('picture_image', array(
+                'target_field' => 'PictureImage', 'file_field' => 'PictureImageFile',
+                'upload_directory' => $container->getParameter('product_picture_upload_directory'),
+                'upload_alias' => $container->getParameter('product_picture_upload_alias'),
+            ));
     }
 
     public function toString($object)
@@ -75,5 +66,4 @@ class ProductPictureAdmin extends AbstractAdmin
             $object->getPictureImage() :
             'Новое изображение';
     }
-
 }

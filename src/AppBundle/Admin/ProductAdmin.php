@@ -1,17 +1,21 @@
 <?php
 namespace AppBundle\Admin;
 
-use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 
-class ProductAdmin extends AbstractAdmin
+class ProductAdmin extends UploadAdmin
 {
     protected $parentAssociationMapping = 'product_category';
     
     protected function configureFormFields(FormMapper $formMapper)
     {
+        $instructionOptions = array('label' => 'Инструкция', 'data_class' => null, 'required' => false);
+        if (($product = $this->getSubject()) && ($webPath = $product->getProductInstruction())) {
+            $instructionOptions['help'] = $webPath;
+        }
+        
         $formMapper
             ->add('product_category', 'entity', array(
                 'class' => 'AppBundle\Entity\Category',
@@ -26,7 +30,7 @@ class ProductAdmin extends AbstractAdmin
             ->add('product_price_old', 'text', array('label' => 'Старая цена'))
             ->add('product_short_desctiption', 'textarea', array('label' => 'Краткое описание', 'required' => false))
             ->add('product_full_desctiption', 'textarea', array('label' => 'Подробное описание', 'required' => false))
-            ->add('product_instruction', null, array('label' => 'Инструкция'))
+            ->add('product_instruction_file', 'file', $instructionOptions)
             ->add('product_active', null, array('label' => 'Видимость'));
     }
 
@@ -54,6 +58,18 @@ class ProductAdmin extends AbstractAdmin
                 'actions' => array(
                     'product_picture' => array('template' => 'AppBundle::product_picture.html.twig')
                 )));
+    }
+    
+    public function configureUploadFields()
+    {
+        $container = $this->getConfigurationPool()->getContainer();
+        
+        $this
+            ->addUploadField('product_instruction', array(
+                'target_field' => 'ProductInstruction', 'file_field' => 'ProductInstructionFile',
+                'upload_directory' => $container->getParameter('instruction_upload_directory'),
+                'upload_alias' => $container->getParameter('instruction_upload_alias'),
+            ));
     }
 
     public function toString($object)

@@ -5,6 +5,8 @@ parameters:
     product_picture_upload_alias    : '/upload/product/'
     category_upload_directory: '%kernel.root_dir%/../web/upload/category/'
     category_upload_alias    : '/upload/category/'
+    instruction_upload_directory: '%kernel.root_dir%/../web/upload/instruction/'
+    instruction_upload_alias    : '/upload/instruction/'
 
 services:
 #    service_name:

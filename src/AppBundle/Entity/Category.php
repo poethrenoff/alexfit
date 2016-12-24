@@ -63,6 +63,7 @@ class Category
      * @ORM\Column(type="string")
      */
     private $category_picture;
+    private $category_picture_file;
     
     /**
      * @var int
@@ -92,94 +93,7 @@ class Category
     {
         return $this->getCategoryTitle();
     }
-
-    /**
-     * Unmapped property to handle file uploads
-     */
-    private $file;
-
-    /**
-     * Sets file.
-     *
-     * @param UploadedFile $file
-     */
-    public function setFile(\Symfony\Component\HttpFoundation\File\UploadedFile $file = null)
-    {
-        $this->file = $file;
-    }
-
-    /**
-     * Get file.
-     *
-     * @return UploadedFile
-     */
-    public function getFile()
-    {
-        return $this->file;
-    }
-
-    /**
-     * Upload directory
-     */
-    private $upload_directory;
-
-    /**
-     * Set upload directory
-     */
-    public function setUploadDirectory($upload_directory)
-    {
-        $this->upload_directory = $upload_directory;
-    }
-
-    /**
-     * Get upload directory
-     */
-    public function getUploadDirectory()
-    {
-        return $this->upload_directory;
-    }
-
-    /**
-     * Upload alias
-     */
-    private $upload_alias;
-
-    /**
-     * Set upload alias
-     */
-    public function setUploadAlias($upload_alias)
-    {
-        $this->upload_alias = $upload_alias;
-    }
-
-    /**
-     * Get upload alias
-     */
-    public function getUploadAlias()
-    {
-        return $this->upload_alias;
-    }
-
-    /**
-     * Upload file
-     */
-    public function upload()
-    {    
-        if (null === $this->getFile()) {
-            return;
-        }
-        
-        $this->getFile()->move(
-            $this->getUploadDirectory(), $this->getFile()->getClientOriginalName()
-        );
-
-        $this->setCategoryPicture(
-            $this->getUploadAlias() . $this->getFile()->getClientOriginalName()
-        );
-
-        $this->setFile(null);
-    }
-   
+ 
     /**
      * Get categoryId
      *
@@ -308,6 +222,30 @@ class Category
     public function getCategoryPicture()
     {
         return $this->category_picture;
+    }
+
+    /**
+     * Set categoryPictureFile
+     *
+     * @param string $categoryPictureFile
+     *
+     * @return Category
+     */
+    public function setCategoryPictureFile($categoryPictureFile)
+    {
+        $this->category_picture_file = $categoryPictureFile;
+
+        return $this;
+    }
+
+    /**
+     * Get categoryPictureFile
+     *
+     * @return string
+     */
+    public function getCategoryPictureFile()
+    {
+        return $this->category_picture_file;
     }
 
     /**

@@ -1,12 +1,12 @@
 <?php
 namespace AppBundle\Admin;
 
-use Sonata\AdminBundle\Admin\AbstractAdmin;
+use  AppBundle\Admin\UploadAdmin;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 
-class CategoryAdmin extends AbstractAdmin
+class CategoryAdmin extends UploadAdmin
 {
     protected $parentAssociationMapping = 'category_catalogue';
 
@@ -17,10 +17,10 @@ class CategoryAdmin extends AbstractAdmin
 
     protected function configureFormFields(FormMapper $formMapper)
     {
-        $fileFieldOptions = array('required' => false, 'label' => 'Изображение');
-
-        if (($image = $this->getSubject()) && ($webPath = $image->getCategoryPicture())) {
-            $fileFieldOptions['help'] = '<img src="' . $webPath . '" style="max-width: 150px; max-height: 150px" />';
+        $pictureOptions = array('label' => 'Изображение', 'data_class' => null);
+        if (($subject = $this->getSubject()) && ($webPath = $subject->getCategoryPicture())) {
+            $pictureOptions['help'] = '<img src="' . $webPath . '" style="max-width: 150px; max-height: 150px" />';;
+            $pictureOptions['required'] = false;
         }
 
         $formMapper
@@ -32,7 +32,7 @@ class CategoryAdmin extends AbstractAdmin
             ->add('category_short_title', 'text', array('label' => 'Краткое название'))
             ->add('category_name', 'text', array('label' => 'Ссылка'))
             ->add('category_description', 'textarea', array('label' => 'Описание', 'required' => false))
-            ->add('file', 'file', $fileFieldOptions)
+            ->add('category_picture_file', 'file', $pictureOptions)
             ->add('category_order', null, array('label' => 'Порядок'))
             ->add('category_active', null, array('label' => 'Видимость'));
     }
@@ -60,25 +60,17 @@ class CategoryAdmin extends AbstractAdmin
                     'product' => array('template' => 'AppBundle::product.html.twig')
                 )));
     }
-
-    public function prePersist($image)
-    {
-        $this->manageFileUpload($image);
-    }
-
-    public function preUpdate($image)
-    {
-        $this->manageFileUpload($image);
-    }
-
-    public function manageFileUpload($image)
+    
+    public function configureUploadFields()
     {
         $container = $this->getConfigurationPool()->getContainer();
-
-        $image->setUploadDirectory($container->getParameter('category_upload_directory'));
-        $image->setUploadAlias($container->getParameter('category_upload_alias'));
-
-        $image->upload();
+        
+        $this
+            ->addUploadField('category_picture', array(
+                'target_field' => 'CategoryPicture', 'file_field' => 'CategoryPictureFile',
+                'upload_directory' => $container->getParameter('category_upload_directory'),
+                'upload_alias' => $container->getParameter('category_upload_alias'),
+            ));
     }
 
     public function toString($object)

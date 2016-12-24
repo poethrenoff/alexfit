@@ -78,6 +78,7 @@ class Product
      * @ORM\Column(type="string", nullable=true)
      */
     private $product_instruction;
+    private $product_instruction_file;
     
     /**
      * @var boolean
@@ -100,7 +101,7 @@ class Product
     {
         return $this->getProductTitle();
     }
-
+    
     /**
      * Get productId
      *
@@ -253,6 +254,30 @@ class Product
     public function getProductInstruction()
     {
         return $this->product_instruction;
+    }
+
+    /**
+     * Set productInstructionFile
+     *
+     * @param string $productInstructionFile
+     *
+     * @return Product
+     */
+    public function setProductInstructionFile($productInstructionFile)
+    {
+        $this->product_instruction_file = $productInstructionFile;
+
+        return $this;
+    }
+
+    /**
+     * Get productInstructionFile
+     *
+     * @return string
+     */
+    public function getProductInstructionFile()
+    {
+        return $this->product_instruction_file;
     }
 
     /**
