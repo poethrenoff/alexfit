@@ -1,9 +1,7 @@
 <?php
 namespace AppBundle\Admin;
 
-use Sonata\AdminBundle\Admin\AbstractAdmin;
-
-abstract class UploadAdmin extends AbstractAdmin
+trait UploadTrait
 {
     private $uploadFields = array();
     

@@ -1,13 +1,17 @@
 <?php
 namespace AppBundle\Admin;
 
-use  AppBundle\Admin\UploadAdmin;
+use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 
-class CategoryAdmin extends UploadAdmin
+use AppBundle\Admin\UploadTrait;
+
+class CategoryAdmin extends AbstractAdmin
 {
+    use UploadTrait;
+    
     protected $parentAssociationMapping = 'category_catalogue';
 
     protected $datagridValues = array(

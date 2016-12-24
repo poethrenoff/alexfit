@@ -1,12 +1,17 @@
 <?php
 namespace AppBundle\Admin;
 
+use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 
-class ProductAdmin extends UploadAdmin
+use AppBundle\Admin\UploadTrait;
+
+class ProductAdmin extends AbstractAdmin
 {
+    use UploadTrait;
+    
     protected $parentAssociationMapping = 'product_category';
     
     protected function configureFormFields(FormMapper $formMapper)
