@@ -47,14 +47,14 @@ class Product
     /**
      * @var double
      * 
-     * @ORM\Column(type="decimal", precision=10, scale=2)
+     * @ORM\Column(type="integer")
      */
     private $product_price;
     
     /**
-     * @var double
+     * @var int
      * 
-     * @ORM\Column(type="decimal", precision=10, scale=2)
+     * @ORM\Column(type="integer")
      */
     private $product_price_old;
 

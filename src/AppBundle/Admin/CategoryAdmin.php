@@ -61,7 +61,7 @@ class CategoryAdmin extends AbstractAdmin
             ->add('_action', 'actions', array(
                 'label' => 'Операции',
                 'actions' => array(
-                    'product' => array('template' => 'AppBundle::product.html.twig')
+                    'product' => array('template' => 'AppBundle::Admin/product.html.twig')
                 )));
     }
     

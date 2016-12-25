@@ -1,0 +1,92 @@
+https://github.com/Gregwar/ImageBundle - изучить!
+
+https://github.com/Gregwar/CaptchaBundle - изучить!
+
+Залить базу
+
+CKEditor
+
+--------------------------------------------------------------------
+
+article
+  `article_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `article_title` varchar(255) NOT NULL DEFAULT '',
+  `article_announce` text NOT NULL,
+  `article_text` text NOT NULL,
+  `article_active` text NOT NULL,
+
+brand
+  `brand_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `brand_name` varchar(255) NOT NULL DEFAULT '',
+  `brand_country` varchar(255) NOT NULL DEFAULT '',
+
+groups
+  `group_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `group_title` varchar(255) NOT NULL DEFAULT '',
+   group_name
+  `group_description` text NOT NULL,
+  `group_order` int(10) unsigned NOT NULL DEFAULT '0',
+  `group_active` tinyint(3) unsigned NOT NULL DEFAULT '0',
+
+category
+  `category_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `category_group` int(10) unsigned NOT NULL DEFAULT '0',
+  `category_title` varchar(255) NOT NULL DEFAULT '',
+  `category_short_title` varchar(255) NOT NULL DEFAULT '',
+   category_name
+  `category_picture` varchar(255) NOT NULL DEFAULT '',
+  `category_description` text NOT NULL,
+  `category_order` int(10) unsigned NOT NULL DEFAULT '0',
+  `category_active` tinyint(3) unsigned NOT NULL DEFAULT '0',
+
+product
+	'product_id' => array( 'title' => 'Идентификатор', 'type' => 'pk' ),
+	'product_catalogue' => array( 'title' => 'Каталог', 'type' => 'table', 'table' => 'catalogue', 'errors' => array('require') ),
+	'product_brand' => array( 'title' => 'Бренд', 'type' => 'table', 'table' => 'brand' ),
+	'product_title' => array( 'title' => 'Название', 'type' => 'string', 'main' => 1, 'errors' => array('require') ),
+	'product_price' => array( 'title' => 'Цена', 'type' => 'float', 'errors' => array('require') ),
+	`product_short_desc` text NOT NULL,
+	`product_full_desc` text NOT NULL,
+	'product_instruction' => array( 'title' => 'Инструкция', 'type' => 'file', 'upload_dir' => 'instruction'),
+	'product_active' => array( 'title' => 'Видимость', 'type' => 'active' ),
+
+'product_picture' => array(
+	'picture_id' => array( 'title' => 'Идентификатор', 'type' => 'pk' ),
+	'picture_product' => array( 'title' => 'Товар', 'type' => 'table', 'table' => 'product', 'errors' => array('require') ),
+	'picture_image' => array( 'title' => 'Изображение', 'type' => 'image', 'upload_dir' => 'image', 'main' => 1, 'errors' => array('require') ),
+	'picture_order' => array( 'title' => 'Порядок', 'type' => 'order', 'group' => array( 'picture_product' ) ),
+
+purchase
+  `purchase_id` int(11) NOT NULL AUTO_INCREMENT,
+  `purchase_person` varchar(255) NOT NULL DEFAULT '',
+  `purchase_email` varchar(255) NOT NULL DEFAULT '',
+  `purchase_phone` varchar(255) NOT NULL DEFAULT '',
+  `purchase_address` text,
+  `purchase_comment` text,
+  `purchase_date` varchar(14) NOT NULL DEFAULT '',
+  `purchase_sum` double DEFAULT '0',
+  `purchase_status` varchar(255) NOT NULL DEFAULT '',
+		array('value' => 'new', 'title' => 'Новый'),
+		array('value' => 'confirm', 'title' => 'Подтвержден'),
+		array('value' => 'deliver', 'title' => 'В доставке'),
+		array('value' => 'complete', 'title' => 'Выполнен'),
+		array('value' => 'cancel', 'title' => 'Отменен')), 'show' => 1, 'errors' => array('require')),
+
+'purchase_item' => array(
+	'item_id' => array('title' => 'Идентификатор', 'type' => 'pk'),
+	'item_purchase' => array('title' => 'Заказ', 'type' => 'table', 'table' => 'purchase', 'errors' => array('require'), 'no_edit' => 1),
+	'item_product' => array('title' => 'Товар', 'type' => 'table', 'table' => 'product', 'main' => 1, 'errors' => array('require')),
+	'item_price' => array('title' => 'Цена', 'type' => 'float', 'show' => 1, 'errors' => array('require')),
+	'item_quantity' => array('title' => 'Количество', 'type' => 'int', 'show' => 1, 'errors' => array('require'))
+
+'preference' => array(
+	'preference_id' => array('title' => 'Идентификатор', 'type' => 'pk'),
+	'preference_title' => array('title' => 'Название', 'type' => 'string', 'show' => 1, 'main' => 1, 'errors' => array('require')),
+	'preference_name' => array('title' => 'Имя', 'type' => 'string', 'show' => 1, 'filter' => 1, 'errors' => array('require', 'alpha'), 'group' => array()),
+	'preference_value' => array('title' => 'Значение', 'type' => 'string', 'show' => 1),
+
+text
+  `text_id` int(11) NOT NULL AUTO_INCREMENT,
+  `text_tag` varchar(255) NOT NULL DEFAULT '',
+  `text_title` varchar(255) NOT NULL DEFAULT '',
+  `text_content` text,

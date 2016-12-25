@@ -1,0 +1,21 @@
+parameters:
+    product_picture_upload_directory: '%kernel.root_dir%/../web/upload/product/'
+    product_picture_upload_alias    : '/upload/product/'
+    
+    category_upload_directory: '%kernel.root_dir%/../web/upload/category/'
+    category_upload_alias    : '/upload/category/'
+    
+    instruction_upload_directory: '%kernel.root_dir%/../web/upload/instruction/'
+    instruction_upload_alias    : '/upload/instruction/'
+
+sonata_block:
+    default_contexts: [cms]
+    blocks:
+        sonata.admin.block.admin_list:
+            contexts: [admin]
+        sonata.admin.block.search_result:
+            contexts: [admin]
+
+sonata_admin:
+    title: 'Alexfit.ru'
+

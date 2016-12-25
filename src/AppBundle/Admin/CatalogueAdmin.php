@@ -41,7 +41,7 @@ class CatalogueAdmin extends AbstractAdmin
             ->add('_action', 'actions', array(
                 'label' => 'Операции',
                 'actions' => array(
-                    'category' => array('template' => 'AppBundle::category.html.twig')
+                    'category' => array('template' => 'AppBundle::Admin/category.html.twig')
                 )));
     }
 

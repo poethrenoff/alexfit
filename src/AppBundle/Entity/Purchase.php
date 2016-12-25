@@ -66,7 +66,7 @@ class Purchase
     /**
      * @var double
      * 
-     * @ORM\Column(type="decimal", precision=10, scale=2)
+     * @ORM\Column(type="integer")
      */
     private $purchase_sum;
 

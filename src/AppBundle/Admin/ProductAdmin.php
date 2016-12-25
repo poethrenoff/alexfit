@@ -61,7 +61,7 @@ class ProductAdmin extends AbstractAdmin
             ->add('_action', 'actions', array(
                 'label' => 'Операции',
                 'actions' => array(
-                    'product_picture' => array('template' => 'AppBundle::product_picture.html.twig')
+                    'product_picture' => array('template' => 'AppBundle::Admin/product_picture.html.twig')
                 )));
     }
     
