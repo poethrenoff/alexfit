@@ -7,6 +7,7 @@ use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 
 use AppBundle\Admin\UploadTrait;
+use AppBundle\Lib\Transliterator;
 
 class CategoryAdmin extends AbstractAdmin
 {
@@ -26,15 +27,21 @@ class CategoryAdmin extends AbstractAdmin
             $pictureOptions['help'] = '<img src="' . $webPath . '" style="max-width: 150px; max-height: 150px" />';;
             $pictureOptions['required'] = false;
         }
-
+        
         $formMapper
             ->add('category_catalogue', 'entity', array(
                 'class' => 'AppBundle\Entity\Catalogue',
                 'label' => 'Группа'
             ))
             ->add('category_title', 'text', array('label' => 'Название'))
-            ->add('category_short_title', 'text', array('label' => 'Краткое название'))
-            ->add('category_name', 'text', array('label' => 'Ссылка'))
+            ->add('category_short_title', 'text', array('label' => 'Краткое название'));
+        
+        if (($category = $this->getSubject()) && !empty($category->getCategoryName())) {
+            $formMapper
+                ->add('category_name', 'text', array('label' => 'Ссылка'));
+        }
+        
+        $formMapper
             ->add('category_description', 'textarea', array('label' => 'Описание', 'required' => false))
             ->add('category_picture_file', 'file', $pictureOptions)
             ->add('category_order', null, array('label' => 'Порядок'))
@@ -75,6 +82,28 @@ class CategoryAdmin extends AbstractAdmin
                 'upload_directory' => $container->getParameter('category_upload_directory'),
                 'upload_alias' => $container->getParameter('category_upload_alias'),
             ));
+    }
+    
+    public function prePersist($object)
+    {
+        parent::prePersist($object);
+        
+        if (empty($object->getCategoryName())) {
+            $object->setCategoryName(Transliterator::transliterate($object->getCategoryShortTitle()));
+        }
+                
+        $this->manageFileUpload($object);
+    }
+
+    public function preUpdate($object)
+    {
+        parent::preUpdate($object);
+        
+        if (empty($object->getCategoryName())) {
+            $object->setCategoryName(Transliterator::transliterate($object->getCategoryShortTitle()));
+        }
+                
+        $this->manageFileUpload($object);
     }
 
     public function toString($object)

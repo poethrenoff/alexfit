@@ -1,10 +1,53 @@
-https://github.com/Gregwar/ImageBundle - изучить!
++ Страна бренда - необязательное поле
 
-https://github.com/Gregwar/CaptchaBundle - изучить!
++ Порядок кратный 10
 
-Залить базу
++ Слаги должны генериться автоматически
 
 CKEditor
+
+--------------------------------------------------------------------
+
+Можно посмотреть
+
+SonataMediaBundle
+https://sonata-project.org/bundles/media/master/doc/index.html
+
+AngularJS
+https://angularjs.org/
+http://angular-doc.herokuapp.com/
+
+--------------------------------------------------------------------
+
+Главная /
+    Шапка
+    Корзина
+    Поиск
+    Верхнее меню
+    Меню каталога
+    Текст
+    Нижнее меню
+    Футер
+О компании /about
+Оснащение тренажерных залов /fitnesscenter
+Комплексное оснащение спортивных объектов /complex
+Оптовикам /service
+Где купить /tobuy
+Оплата и доставка /delivery
+Контакты /contact
+
+Статьи /article
+
+Рассылка /subscribe
+
+Прайслист /price
+
+Каталог /product/catalogue
+Категории /product/catalogue/category
+Товар /product/catalogue/category/id
+
+Корзина /cart
+Оформление заказа /purchase    
 
 --------------------------------------------------------------------
 

@@ -5,7 +5,7 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Doctrine\Bundle\DoctrineBundle\Command\DoctrineCommand;
 
-use Fresh\Transliteration\Transliterator;
+use AppBundle\Lib\Transliterator;
 
 class ConvertSchemaCommand extends DoctrineCommand
 {
@@ -57,7 +57,7 @@ class ConvertSchemaCommand extends DoctrineCommand
         foreach ($brand_list as $brand_item) {
             $connection->insert('brand', array(
                 'brand_title' => $brand_item['brand_name'],
-                'brand_country' => $brand_item['brand_country'],
+                'brand_country' => empty($brand_item['brand_country']) ? null : $brand_item['brand_country'],
             ));
             $brand_map[$brand_item['brand_id']] = $connection->lastInsertId();
         }
@@ -68,15 +68,16 @@ class ConvertSchemaCommand extends DoctrineCommand
         $stmt->execute();
         $group_list = $stmt->fetchAll();
         
-        $catalogue_map = array(); $catalogue_order = 1;
+        $catalogue_map = array(); $catalogue_order = 10;
         foreach ($group_list as $group_item) {
             $connection->insert('catalogue', array(
                 'catalogue_title' => $group_item['group_name'],
-                'catalogue_name' => $this->transliterate($group_item['group_name']),
-                'catalogue_description' => $group_item['group_comment'],
-                'catalogue_order' => $catalogue_order++,
+                'catalogue_name' => Transliterator::transliterate($group_item['group_name']),
+                'catalogue_description' => empty($group_item['group_comment']) ? null : $group_item['group_comment'],
+                'catalogue_order' => $catalogue_order,
                 'catalogue_active' => $group_item['group_active'],
             ));
+            $catalogue_order += 10;
             $catalogue_map[$group_item['group_id']] = $connection->lastInsertId();
         }
         
@@ -95,7 +96,7 @@ class ConvertSchemaCommand extends DoctrineCommand
         
         foreach ($category_list as $category_item) {
             $category_catalogue = $catalogue_map[$category_item['group_id']];
-            @$category_catalogue_map[$category_catalogue]++;
+            @$category_catalogue_map[$category_catalogue] += 10;
             
             if (empty($category_item['category_picture'])) {
                 $category_item['category_picture'] = $category_picture_default;
@@ -109,8 +110,8 @@ class ConvertSchemaCommand extends DoctrineCommand
                 'category_catalogue' => $category_catalogue,
                 'category_title' => $category_item['category_name'],
                 'category_short_title' => $category_item['category_short_name'],
-                'category_name' => $this->transliterate($category_item['category_short_name']),
-                'category_description' => $category_item['category_comment'],
+                'category_name' => Transliterator::transliterate($category_item['category_short_name']),
+                'category_description' => empty($category_item['category_comment']) ? null : $category_item['category_comment'],
                 'category_picture' => $category_picture_alias . $category_item['category_picture'],
                 'category_order' => $category_catalogue_map[$category_catalogue],
                 'category_active' => $category_item['category_active'],
@@ -139,7 +140,7 @@ class ConvertSchemaCommand extends DoctrineCommand
         foreach ($product_list as $product_item) {
             $product_brand = $brand_map[$product_item['brand_id']];
             $product_category = $category_map[$product_item['category_id']];
-            @$catalogue_product_map[$product_category]++;
+            @$catalogue_product_map[$product_category] += 10;
             
             if (empty($product_item['product_picture'])) {
                 $product_item['product_picture'] = $product_picture_default;
@@ -161,15 +162,15 @@ class ConvertSchemaCommand extends DoctrineCommand
                 'product_title' => $product_item['product_name'],
                 'product_price' => $product_item['product_price'],
                 'product_price_old' => 0,
-                'product_short_desctiption' => $product_item['product_short_desc'],
-                'product_full_desctiption' => $product_item['product_full_desc'],
-                'product_instruction' => $product_item['product_instruct'] ? $product_instruction_alias . $product_item['product_instruct'] : null,
+                'product_short_desctiption' => empty($product_item['product_short_desc']) ? null : $product_item['product_short_desc'],
+                'product_full_desctiption' => empty($product_item['product_full_desc']) ? null : $product_item['product_full_desc'],
+                'product_instruction' => empty($product_item['product_instruct']) ? null : ($product_instruction_alias . $product_item['product_instruct']),
                 'product_active' => $product_item['product_active'],
             ));
             $product_id = $connection->lastInsertId();
             
             $product_picture_map = array();
-            @$product_picture_map[$product_id]++;
+            @$product_picture_map[$product_id] += 10;
             
             $connection->insert('product_picture', array(
                 'picture_product' => $product_id,
@@ -183,7 +184,7 @@ class ConvertSchemaCommand extends DoctrineCommand
             $picture_product_list = $stmt->fetchAll();
         
             foreach ($picture_product_list as $product_picture_item) {
-                @$product_picture_map[$product_id]++;
+                @$product_picture_map[$product_id] += 10;
 
                 if (empty($product_picture_item['picture_name'])) {
                     $product_picture_item['picture_name'] = $product_picture_default;
@@ -200,18 +201,5 @@ class ConvertSchemaCommand extends DoctrineCommand
                 ));
             }
         }
-    }
-    
-    protected function transliterate(string $text)
-    {
-        $transliterator = new Transliterator();
-        
-        $result = $transliterator->ruToEn($text);
-        
-        $result = preg_replace('/\s+/', '-', $result);
-        $result = preg_replace('/[^A-z-]/', '', $result);
-        $result = strtolower($result);
-        
-        return $result; 
     }
 }

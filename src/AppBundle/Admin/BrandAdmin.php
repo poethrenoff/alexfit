@@ -12,7 +12,7 @@ class BrandAdmin extends AbstractAdmin
     {
         $formMapper
             ->add('brand_title', 'text', array('label' => 'Название'))
-            ->add('brand_country', 'text', array('label' => 'Страна'));
+            ->add('brand_country', 'text', array('label' => 'Страна', 'required' => false));
     }
 
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
