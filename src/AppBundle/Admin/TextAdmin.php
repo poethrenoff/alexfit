@@ -13,7 +13,7 @@ class TextAdmin extends AbstractAdmin
         $formMapper
             ->add('text_tag', 'text', array('label' => 'Метка'))
             ->add('text_title', 'text', array('label' => 'Заголовок'))
-            ->add('text_content', 'textarea', array('label' => 'Текст'));
+            ->add('text_content', 'textarea', array('label' => 'Текст', 'attr' => array('class' => 'ckeditor')));
     }
 
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)

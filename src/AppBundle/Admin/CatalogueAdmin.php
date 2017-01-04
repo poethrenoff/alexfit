@@ -26,7 +26,7 @@ class CatalogueAdmin extends AbstractAdmin
         }
         
         $formMapper
-            ->add('catalogue_description', 'textarea', array('label' => 'Описание', 'required' => false))
+            ->add('catalogue_description', 'textarea', array('label' => 'Описание', 'required' => false, 'attr' => array('class' => 'ckeditor')))
             ->add('catalogue_order', null, array('label' => 'Порядок'))
             ->add('catalogue_active', null, array('label' => 'Видимость'));
     }

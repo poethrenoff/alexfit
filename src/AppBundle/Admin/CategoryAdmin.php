@@ -42,7 +42,7 @@ class CategoryAdmin extends AbstractAdmin
         }
         
         $formMapper
-            ->add('category_description', 'textarea', array('label' => 'Описание', 'required' => false))
+            ->add('category_description', 'textarea', array('label' => 'Описание', 'required' => false, 'attr' => array('class' => 'ckeditor')))
             ->add('category_picture_file', 'file', $pictureOptions)
             ->add('category_order', null, array('label' => 'Порядок'))
             ->add('category_active', null, array('label' => 'Видимость'));

@@ -4,12 +4,16 @@ services:
         arguments: [~, AppBundle\Entity\Text, ~]
         tags:
             - { name: sonata.admin, manager_type: orm, label: Тексты, group: Контент }
-            
+        calls:
+            - [ setTemplate, [edit, AppBundle:Admin:edit.html.twig]]
+
     admin.article:
         class: AppBundle\Admin\ArticleAdmin
         arguments: [~, AppBundle\Entity\Article, ~]
         tags:
             - { name: sonata.admin, manager_type: orm, label: Статьи, group: Контент }
+        calls:
+            - [ setTemplate, [edit, AppBundle:Admin:edit.html.twig]]
     
     admin.brand:
         class: AppBundle\Admin\BrandAdmin
@@ -24,6 +28,7 @@ services:
             - { name: sonata.admin, manager_type: orm, label: Группы, group: Каталог }
         calls:
             - [ addChild, ['@admin.category'] ]
+            - [ setTemplate, [edit, AppBundle:Admin:edit.html.twig]]
 
     admin.category:
         class: AppBundle\Admin\CategoryAdmin
@@ -32,6 +37,7 @@ services:
             - { name: sonata.admin, manager_type: orm, label: Категории, group: Каталог }
         calls:
             - [ addChild, ['@admin.product'] ]
+            - [ setTemplate, [edit, AppBundle:Admin:edit.html.twig]]
 
     admin.product:
         class: AppBundle\Admin\ProductAdmin
@@ -40,6 +46,7 @@ services:
             - { name: sonata.admin, manager_type: orm, label: Товары, group: Каталог }
         calls:
             - [ addChild, ['@admin.product_picture'] ]
+            - [ setTemplate, [edit, AppBundle:Admin:edit.html.twig]]
             
     admin.product_picture:
         class: AppBundle\Admin\ProductPictureAdmin

@@ -1,4 +1,7 @@
 parameters:
+    upload_directory: '%kernel.root_dir%/../web/upload/'
+    upload_alias    : '/upload/'
+    
     product_picture_upload_directory: '%kernel.root_dir%/../web/upload/product/'
     product_picture_upload_alias    : '/upload/product/'
     

@@ -12,8 +12,8 @@ class ArticleAdmin extends AbstractAdmin
     {
         $formMapper
             ->add('article_title', 'text', array('label' => 'Название'))
-            ->add('article_announce', 'textarea', array('label' => 'Анонс'))
-            ->add('article_text', 'textarea', array('label' => 'Текст'))
+            ->add('article_announce', 'textarea', array('label' => 'Анонс', 'attr' => array('class' => 'ckeditor')))
+            ->add('article_text', 'textarea', array('label' => 'Текст', 'attr' => array('class' => 'ckeditor')))
             ->add('article_active', null, array('label' => 'Видимость'));
     }
 
