@@ -2,6 +2,7 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Text
@@ -21,16 +22,25 @@ class Text
     private $text_id;
     
     /**
+     * @var string
+     * 
+     * @Assert\NotBlank()
      * @ORM\Column(type="string")
      */
     private $text_tag;
     
     /**
+     * @var string
+     * 
+     * @Assert\NotBlank()
      * @ORM\Column(type="string")
      */
     private $text_title;
     
     /**
+     * @var text
+     * 
+     * @Assert\NotBlank()
      * @ORM\Column(type="text")
      */
     private $text_content;

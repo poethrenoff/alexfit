@@ -5,6 +5,7 @@ use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Form\FormMapper;
+use Sonata\CoreBundle\Validator\ErrorElement;
 
 class TextAdmin extends AbstractAdmin
 {
@@ -13,7 +14,7 @@ class TextAdmin extends AbstractAdmin
         $formMapper
             ->add('text_tag', 'text', array('label' => 'Метка'))
             ->add('text_title', 'text', array('label' => 'Заголовок'))
-            ->add('text_content', 'textarea', array('label' => 'Текст', 'attr' => array('class' => 'ckeditor')));
+            ->add('text_content', 'textarea', array('label' => 'Текст', 'attr' => array('class' => 'editor')));
     }
 
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
@@ -32,6 +33,14 @@ class TextAdmin extends AbstractAdmin
             ))
             ->add('text_tag', null, array('label' => 'Метка'))
             ->addIdentifier('text_title', null, array('label' => 'Заголовок'));
+    }
+    
+    public function validate(ErrorElement $errorElement, $object)
+    {
+        $errorElement
+            ->with('text_content')
+                ->assertNotBlank()
+            ->end();
     }
     
     public function toString($object)

@@ -3,6 +3,7 @@ namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Purchase
@@ -24,6 +25,7 @@ class Purchase
     /**
      * @var string
      * 
+     * @Assert\NotBlank()
      * @ORM\Column(type="string")
      */
     private $purchase_person;
@@ -31,6 +33,7 @@ class Purchase
     /**
      * @var string
      * 
+     * @Assert\NotBlank()
      * @ORM\Column(type="string")
      */
     private $purchase_email;
@@ -38,6 +41,7 @@ class Purchase
     /**
      * @var string
      * 
+     * @Assert\NotBlank()
      * @ORM\Column(type="string")
      */
     private $purchase_phone;
@@ -45,6 +49,7 @@ class Purchase
     /**
      * @var string
      * 
+     * @Assert\NotBlank()
      * @ORM\Column(type="text")
      */
     private $purchase_address;
@@ -52,13 +57,14 @@ class Purchase
     /**
      * @var string
      * 
-     * @ORM\Column(type="text")
+     * @ORM\Column(type="text", nullable=true)
      */
     private $purchase_comment;
 
     /**
      * @var date
      * 
+     * @Assert\NotBlank()
      * @ORM\Column(type="date")
      */
     private $purchase_date;
@@ -66,6 +72,7 @@ class Purchase
     /**
      * @var double
      * 
+     * @Assert\NotBlank()
      * @ORM\Column(type="integer")
      */
     private $purchase_sum;
@@ -73,6 +80,7 @@ class Purchase
     /**
      * @var string
      * 
+     * @Assert\NotBlank()
      * @ORM\Column(type="string")
      */
     private $purchase_status;

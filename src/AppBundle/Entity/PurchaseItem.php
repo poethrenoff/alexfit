@@ -2,6 +2,7 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * PurchaseItem
@@ -23,6 +24,7 @@ class PurchaseItem
     /**
      * @var int
      * 
+     * @Assert\NotBlank()
      * @ORM\ManyToOne(targetEntity="Purchase", inversedBy="items")
      * @ORM\JoinColumn(name="item_purchase", referencedColumnName="purchase_id")
      */
@@ -31,6 +33,7 @@ class PurchaseItem
     /**
      * @var int
      * 
+     * @Assert\NotBlank()
      * @ORM\ManyToOne(targetEntity="Product")
      * @ORM\JoinColumn(name="item_product", referencedColumnName="product_id")
      */
@@ -39,6 +42,7 @@ class PurchaseItem
     /**
      * @var double
      * 
+     * @Assert\NotBlank()
      * @ORM\Column(type="decimal", precision=10, scale=2)
      */
     private $item_price;
@@ -46,6 +50,7 @@ class PurchaseItem
     /**
      * @var int
      * 
+     * @Assert\NotBlank()
      * @ORM\Column(type="integer")
      */
     private $item_quantity;

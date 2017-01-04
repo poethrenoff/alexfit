@@ -2,6 +2,7 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Preference
@@ -23,6 +24,7 @@ class Preference
     /**
      * @var string
      * 
+     * @Assert\NotBlank()
      * @ORM\Column(type="string")
      */
     private $preference_title;
@@ -30,6 +32,7 @@ class Preference
     /**
      * @var string
      * 
+     * @Assert\NotBlank()
      * @ORM\Column(type="string")
      */
     private $preference_name;
@@ -37,6 +40,7 @@ class Preference
     /**
      * @var string
      * 
+     * @Assert\NotBlank()
      * @ORM\Column(type="string")
      */
     private $preference_value;

@@ -31,12 +31,12 @@ class ProductAdmin extends AbstractAdmin
                 'label' => 'Производитель'
             ))
             ->add('product_title', 'text', array('label' => 'Название'))
-            ->add('product_price', 'text', array('label' => 'Цена'))
-            ->add('product_price_old', 'text', array('label' => 'Старая цена'))
-            ->add('product_short_desctiption', 'textarea', array('label' => 'Краткое описание', 'required' => false, 'attr' => array('class' => 'ckeditor')))
-            ->add('product_full_desctiption', 'textarea', array('label' => 'Подробное описание', 'required' => false, 'attr' => array('class' => 'ckeditor')))
+            ->add('product_price', 'integer', array('label' => 'Цена'))
+            ->add('product_price_old', 'integer', array('label' => 'Старая цена'))
+            ->add('product_short_desctiption', 'textarea', array('label' => 'Краткое описание', 'required' => false, 'attr' => array('class' => 'editor')))
+            ->add('product_full_desctiption', 'textarea', array('label' => 'Подробное описание', 'required' => false, 'attr' => array('class' => 'editor')))
             ->add('product_instruction_file', 'file', $instructionOptions)
-            ->add('product_active', null, array('label' => 'Видимость'));
+            ->add('product_active', 'checkbox', array('label' => 'Видимость'));
     }
 
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)

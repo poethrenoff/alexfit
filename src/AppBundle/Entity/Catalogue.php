@@ -3,6 +3,7 @@ namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Catalogue
@@ -24,6 +25,7 @@ class Catalogue
     /**
      * @var string
      * 
+     * @Assert\NotBlank()
      * @ORM\Column(type="string")
      */
     private $catalogue_title;
@@ -31,6 +33,7 @@ class Catalogue
     /**
      * @var string
      * 
+     * @Assert\NotBlank()
      * @ORM\Column(type="string")
      */
     private $catalogue_name;
@@ -45,6 +48,7 @@ class Catalogue
     /**
      * @var int
      * 
+     * @Assert\NotBlank()
      * @ORM\Column(type="integer")
      */
     private $catalogue_order;

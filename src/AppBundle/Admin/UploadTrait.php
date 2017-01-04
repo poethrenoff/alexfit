@@ -7,7 +7,7 @@ trait UploadTrait
     
     abstract public function configureUploadFields();
     
-    public function addUploadField(string $fieldName, array $fieldDescription) {
+    public function addUploadField($fieldName, array $fieldDescription) {
         $this->uploadFields[$fieldName] = $fieldDescription;
         
         return $this;

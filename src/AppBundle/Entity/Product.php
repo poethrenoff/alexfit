@@ -3,6 +3,7 @@ namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Product
@@ -24,6 +25,7 @@ class Product
     /**
      * @var int
      * 
+     * @Assert\NotBlank()
      * @ORM\ManyToOne(targetEntity="Category", inversedBy="products")
      * @ORM\JoinColumn(name="product_category", referencedColumnName="category_id")
      */
@@ -32,6 +34,7 @@ class Product
     /**
      * @var int
      * 
+     * @Assert\NotBlank()
      * @ORM\ManyToOne(targetEntity="Brand")
      * @ORM\JoinColumn(name="product_brand", referencedColumnName="brand_id")
      */
@@ -40,13 +43,15 @@ class Product
     /**
      * @var string
      * 
+     * @Assert\NotBlank()
      * @ORM\Column(type="string")
      */
     private $product_title;
     
     /**
-     * @var double
+     * @var int
      * 
+     * @Assert\NotBlank()
      * @ORM\Column(type="integer")
      */
     private $product_price;
@@ -54,6 +59,7 @@ class Product
     /**
      * @var int
      * 
+     * @Assert\NotBlank()
      * @ORM\Column(type="integer")
      */
     private $product_price_old;

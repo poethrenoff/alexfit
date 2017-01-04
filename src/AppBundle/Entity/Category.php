@@ -3,6 +3,7 @@ namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Category
@@ -32,6 +33,7 @@ class Category
     /**
      * @var string
      * 
+     * @Assert\NotBlank()
      * @ORM\Column(type="string")
      */
     private $category_title;
@@ -39,6 +41,7 @@ class Category
     /**
      * @var string
      * 
+     * @Assert\NotBlank()
      * @ORM\Column(type="string")
      */
     private $category_short_title;
@@ -46,6 +49,7 @@ class Category
     /**
      * @var string
      * 
+     * @Assert\NotBlank()
      * @ORM\Column(type="string")
      */
     private $category_name;
@@ -60,6 +64,7 @@ class Category
     /**
      * @var string
      * 
+     * @Assert\NotBlank()
      * @ORM\Column(type="string")
      */
     private $category_picture;
@@ -68,6 +73,7 @@ class Category
     /**
      * @var int
      * 
+     * @Assert\NotBlank()
      * @ORM\Column(type="integer")
      */
     private $category_order;

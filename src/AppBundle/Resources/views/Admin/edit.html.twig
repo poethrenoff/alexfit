@@ -2,5 +2,13 @@
 
 {% block javascripts %}
 {{ parent() }}
-<script src="{{ asset('admin/ckeditor/ckeditor.js') }}" type="text/javascript"></script>
+<script type="text/javascript" src="{{ asset('admin/ckeditor/ckeditor.js') }}"></script>
+<script type="text/javascript" src="{{ asset('admin/ckeditor/adapters/jquery.js') }}"></script>
+<script type="text/javascript">
+    $(function() {
+        $('textarea.editor').ckeditor({
+            filebrowserUploadUrl: '{{ path('upload') }}'
+        });
+    });
+</script>
 {% endblock %}

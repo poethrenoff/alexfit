@@ -2,6 +2,7 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * ProductPicture
@@ -21,6 +22,7 @@ class ProductPicture
     private $picture_id;
     
     /**
+     * @Assert\NotBlank()
      * @ORM\ManyToOne(targetEntity="Product", inversedBy="pictures")
      * @ORM\JoinColumn(name="picture_product", referencedColumnName="product_id")
      */
@@ -29,6 +31,7 @@ class ProductPicture
     /**
      * @var string
      * 
+     * @Assert\NotBlank()
      * @ORM\Column(type="string")
      */
     private $picture_image;

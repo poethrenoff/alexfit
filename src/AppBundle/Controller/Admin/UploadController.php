@@ -20,30 +20,29 @@ class UploadController extends Controller
         
         $file = $request->files->get('upload');
         if (!$file) {
-            return $this->getResponse($CKEditorFuncNum, '', 'Отсутствует файл для закачки!');
+            return $this->render('AppBundle:Admin:upload.html.twig', array(
+                'CKEditorFuncNum' => $CKEditorFuncNum,
+                'errorMessage' => 'Отсутствует файл для закачки!'
+            ));
         }
         
         $uploadDirectory = $this->container->getParameter('upload_directory');
         $uploadAlias = $this->container->getParameter('upload_alias');
         
-        $newFileName = Transliterator::transliterate($file->getClientOriginalName());
+        $fileName = Transliterator::transliterate($file->getClientOriginalName());
         
         try {
-            $file->move($uploadDirectory, $newFileName);
+            $file->move($uploadDirectory, $fileName);
         } catch (FileException $e) {
-            return $this->getResponse($CKEditorFuncNum, '', 'Ошибка при загрузке файла!');
+            return $this->render('AppBundle:Admin:upload.html.twig', array(
+                'CKEditorFuncNum' => $CKEditorFuncNum,
+                'errorMessage' => 'Ошибка при загрузке файла!'
+            ));
         }
         
-        return $this->getResponse($CKEditorFuncNum, $uploadAlias . $newFileName);
-    }
-    
-    public function getResponse($CKEditorFuncNum, $filePath = '', $errorMessage = '')
-    {
-        return new Response(<<<HTML
-<script type='text/javascript'>
-     window.parent.CKEDITOR.tools.callFunction('{$CKEditorFuncNum}', '{$filePath}', '{$errorMessage}');
-</script>
-HTML
-        );
+        return $this->render('AppBundle:Admin:upload.html.twig', array(
+            'CKEditorFuncNum' => $CKEditorFuncNum,
+            'filePath' => $uploadAlias . $fileName
+        ));
     }
 }

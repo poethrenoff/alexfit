@@ -42,10 +42,10 @@ class CategoryAdmin extends AbstractAdmin
         }
         
         $formMapper
-            ->add('category_description', 'textarea', array('label' => 'Описание', 'required' => false, 'attr' => array('class' => 'ckeditor')))
+            ->add('category_description', 'textarea', array('label' => 'Описание', 'required' => false, 'attr' => array('class' => 'editor')))
             ->add('category_picture_file', 'file', $pictureOptions)
-            ->add('category_order', null, array('label' => 'Порядок'))
-            ->add('category_active', null, array('label' => 'Видимость'));
+            ->add('category_order', 'integer', array('label' => 'Порядок'))
+            ->add('category_active', 'checkbox', array('label' => 'Видимость'));
     }
 
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
