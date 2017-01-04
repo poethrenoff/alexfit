@@ -10,7 +10,6 @@ CKEDITOR.editorConfig = function( config ) {
 	
 	config.language = 'ru';
 	config.removePlugins = 'save,liststyle,tabletools,contextmenu';
-	config.filebrowserUploadUrl = '/admin/upload';
 	config.allowedContent = true; // disable ACF
 	config.disableNativeSpellChecker = false;
 	
