@@ -181,7 +181,7 @@ input.text {
     border: 1px solid #bbbbbb;
 }
 
-input.button {
+input.button, button {
     color: #ffffff;
     width: 120px; height: 20px;
     margin: 0px; padding: 0px;
@@ -299,3 +299,19 @@ div.product_image .thumbnail img {
     max-width: 50px;
     max-height: 50px;
 }
+
+.pager {
+    text-align: center;
+}
+
+form ul {
+    margin: 0px;
+    padding: 0px;
+}
+
+form li {
+    padding: 5px 0px;
+    list-style: none;
+    color: #dd0000;
+}
+

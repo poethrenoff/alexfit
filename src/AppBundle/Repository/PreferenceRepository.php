@@ -10,4 +10,8 @@ namespace AppBundle\Repository;
  */
 class PreferenceRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function findByName($name)
+    {
+        return $this->findOneBy(array('preference_name' => $name));
+    }
 }

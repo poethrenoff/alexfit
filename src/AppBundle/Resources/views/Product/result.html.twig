@@ -4,15 +4,16 @@
     <table cellpadding="0" cellspacing="0" style="width: 100%">
         <tr>
             <td align="left" valign="middle" class="menu_title menu_title">
-                Результаты поиска {% if text is not empty %} "{{ text }}" ({{ productList | length }}){% endif %}
+                Результаты поиска {% if text is not empty %} "{{ text }}" ({{ count }}){% endif %}
             </td>
         </tr>
     </table>
     <div class="page">
 {% for productItem in productList %}
-        <p class="p">{{ loop.index }}. <a href="{{ path('productItem', {catalogueName: productItem.productCategory.categoryCatalogue.catalogueName, categoryName: productItem.productCategory.categoryName, id: productItem.productId}) }}">{{ productItem.productTitle }}</a></p>
+        <p class="p">{{ loop.index + offset }}. <a href="{{ path('productItem', {catalogueName: productItem.productCategory.categoryCatalogue.catalogueName, categoryName: productItem.productCategory.categoryName, id: productItem.productId}) }}">{{ productItem.productTitle }}</a></p><br/>
 {% else %}
         <h2 style="text-align: center">Ничего не найдено!</h2>
 {% endfor %}
+{{ include('AppBundle::pager.html.twig', {pager: pager, url: path('search', {text: text, page: '__page__'})}, false) }}
     </div>
 {% endblock %}

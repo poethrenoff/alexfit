@@ -2,6 +2,8 @@
 
 namespace AppBundle\Repository;
 
+use Doctrine\ORM\Tools\Pagination\Paginator;
+
 /**
  * ProductRepository
  *
@@ -15,7 +17,7 @@ class ProductRepository extends \Doctrine\ORM\EntityRepository
         return $this->findOneBy(array('product_id' => $id, 'product_active' => 1));
     }
     
-    public function findByText($text)
+    public function findByText($text, $offset, $limit)
     {
         $qb = $this->createQueryBuilder('p')
             ->select('p')
@@ -24,7 +26,9 @@ class ProductRepository extends \Doctrine\ORM\EntityRepository
             ->andWhere('c.category_active = :category_active')
             ->orderBy('p.product_price', 'asc')
                 ->setParameter('product_active', true)
-                ->setParameter('category_active', true);
+                ->setParameter('category_active', true)
+                    ->setFirstResult($offset)
+                    ->setMaxResults($limit);
         
         $words = $text !== '' ? preg_split('/\s+/isu', $text) : array();
         foreach ($words as $wordIndex => $word) {
@@ -38,6 +42,6 @@ class ProductRepository extends \Doctrine\ORM\EntityRepository
             $qb->setParameter('word' . $wordIndex, '%' . $word . '%');
         }
         
-        return $qb->getQuery()->getResult();
+        return new Paginator($qb);
     }
 }

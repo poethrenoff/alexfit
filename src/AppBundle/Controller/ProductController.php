@@ -6,6 +6,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use AppBundle\Lib\Pager;
 
 class ProductController extends Controller
 {
@@ -86,16 +87,24 @@ class ProductController extends Controller
      */
     public function searchAction(Request $request)
     {
+        $limit = 20;
+        $page = max(1, $request->query->getInt('page', 1));
+        $offset = ($page - 1) * $limit;
+
         $productList = array();
         
         $text = $request->query->get('text');
         if ($text !== '') {
             $productList = $this->getDoctrine()->getManager()
-                ->getRepository('AppBundle:Product')->findByText($text);
+                ->getRepository('AppBundle:Product')->findByText($text, $offset, $limit);
         }
         
         return $this->render('AppBundle::Product/result.html.twig', array(
-            'productList' => $productList, 'text' => $text
+            'productList' => $productList,
+            'text' => $text,
+            'count' => count($productList),
+            'offset' => $offset,
+            'pager' => Pager::create(count($productList), $limit, $page),
         ));
     }
     
