@@ -87,6 +87,7 @@ class Category
     
     /**
      * @ORM\OneToMany(targetEntity="Product", mappedBy="product_category")
+     * @ORM\OrderBy({"product_price" = "asc"})
      */
     private $products;
 
@@ -357,6 +358,8 @@ class Category
      */
     public function getProducts()
     {
-        return $this->products;
+        return $this->products->filter(function($product) {
+            return $product->getProductActive();
+        });
     }
 }

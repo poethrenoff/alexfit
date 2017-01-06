@@ -62,6 +62,7 @@ class Catalogue
     
     /**
      * @ORM\OneToMany(targetEntity="Category", mappedBy="category_catalogue")
+     * @ORM\OrderBy({"category_order" = "asc"})
      */
     private $categories;
 
@@ -236,6 +237,8 @@ class Catalogue
      */
     public function getCategories()
     {
-        return $this->categories;
+        return $this->categories->filter(function($category) {
+            return $category->getCategoryActive();
+        });
     }
 }

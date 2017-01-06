@@ -1,0 +1,25 @@
+                                    <tr>
+                                        <td align="left" valign="middle" class="menu_title menu_title_red">
+                                            ТРЕНАЖЕРЫ
+                                        </td>
+                                    </tr>
+{% for catalogueItem in catalogueList %}
+                                    <tr>
+                                        <td align="left" valign="middle" class="menu_item menu_item_red" onmouseover="this.className = 'menu_item menu_item_red menu_item_selected'" onmouseout="this.className = 'menu_item menu_item_red'">
+                                            <a href="{{ path('catalogueItem', {catalogueName: catalogueItem.catalogueName}) }}">{{ catalogueItem.catalogueTitle }}</a>
+                                        </td>
+                                    </tr>
+{% for categoryItem in catalogueItem.categories %}
+                                    <tr>
+                                        <td align="left" valign="middle" class="menu_item menu_item_sub" onmouseover="this.className = 'menu_item menu_item_sub menu_item_selected'" onmouseout="this.className = 'menu_item menu_item_sub'">
+                                            <a href="{{ path('categoryItem', {catalogueName: catalogueItem.catalogueName, categoryName: categoryItem.categoryName}) }}">{{ categoryItem.categoryShortTitle }}</a>
+                                        </td>
+                                    </tr>
+{% endfor %}
+{% endfor %}
+                                    <tr>
+                                        <td align="left" valign="middle" class="menu_separator menu_separator_red"/>
+                                    </tr>
+                                    <tr>
+                                        <td align="left" valign="middle" class="menu_empty"/>
+                                    </tr>

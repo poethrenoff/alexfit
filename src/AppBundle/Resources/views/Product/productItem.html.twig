@@ -1,0 +1,77 @@
+{% extends 'AppBundle::base.html.twig' %}
+
+{% block body %}
+    <table cellpadding="0" cellspacing="0" style="width: 100%">
+        <tr>
+            <td align="left" valign="middle" class="menu_title menu_title">
+                <a class="path" href="{{ path('catalogueItem', {catalogueName: productItem.productCategory.categoryCatalogue.catalogueName}) }}">{{ productItem.productCategory.categoryCatalogue.catalogueTitle }}</a>
+                ::
+                <a class="path" href="{{ path('categoryItem', {catalogueName: productItem.productCategory.categoryCatalogue.catalogueName, categoryName: productItem.productCategory.categoryName }) }}">{{ productItem.productCategory.categoryTitle }}</a>
+                ::
+                {{ productItem.productTitle }}
+            </td>
+        </tr>
+    </table>
+    <div class="page">
+        <table cellpadding="2" cellspacing="0" style="width: 100%">
+            <tr valign="top">
+		<td>
+                    <div class="product_image">
+                        <div class="thumbnail">
+{% for pictureItem in productItem.pictures %}
+                            <a href=""><img src="{{ pictureItem.pictureImage }}" style="max-width: 50px; max-height: 50px;" /></a>
+{% endfor %}
+                        </div>
+                        <div class="gallery">
+{% for pictureItem in productItem.pictures %}
+                            <a data-lightbox="product" href="{{ pictureItem.pictureImage }}"><img src="{{ pictureItem.pictureImage }}" style="max-width: 300px; max-height: 300px;" /></a>
+{% endfor %}
+                        </div>
+
+                        <link rel="stylesheet" href="{{ asset('/css/lightbox.css') }}" />
+                        <script src="{{ asset('/js/lightbox.min.js') }}"></script>
+
+                        <script>
+                            $(document).ready(function(){
+                                lightbox.option({
+                                    'showImageNumberLabel': false
+                                });
+                                $('.thumbnail a').click(function(){
+                                    var slideIndex = $(this).index();
+                                    $('.gallery a').each(function(){
+                                        $(this).toggle($(this).index() == slideIndex);
+                                    });
+                                    $('.thumbnail a').each(function(){
+                                        $(this).toggleClass('selected', $(this).index() == slideIndex);
+                                    });
+                                    return false;
+                                });
+                                $('.thumbnail a:first').click();
+                            });
+                        </script>
+                    </div>
+
+                    <div class="price">
+                        <b>Цена: {{ productItem.productPrice }} р.</b>
+{% if productItem.productPriceOld %}
+                        <s>{{ productItem.productPriceOld }} р.</s>
+{% endif %}
+                        <a href="/cart"><img src="/image/basket.gif" alt="Купить" title="Купить"/></a>
+                    </div>
+
+                    <div class="description" style="margin-top: 40px">
+                        <p style="font-size: 9px; color: #743c13" class="c">НДС, доставка по Москве<br/>и сборка включены<br/>в стоимость тренажера!</p>
+                    </div>
+		</td>
+		<td width="100%">
+                    <h1>{{ productItem.productTitle }}</h1>
+                    <p><b>{{ productItem.productShortDescription }}</b></p>
+                    {{ productItem.productFullDescription | raw }}
+{% if productItem.productInstruction %}
+                    <p>» <a href="{{ productItem.productInstruction }}">Инструкция</a></p>
+{% endif %}
+		</td>
+            </tr>
+        </table>
+    </div>
+{% endblock %}

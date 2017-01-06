@@ -1,0 +1,39 @@
+{% extends 'AppBundle::base.html.twig' %}
+
+{% block body %}
+    <table cellpadding="0" cellspacing="0" style="width: 100%">
+        <tr>
+            <td align="left" valign="middle" class="menu_title menu_title">
+                <a class="path" href="{{ path('catalogueItem', {catalogueName: categoryItem.categoryCatalogue.catalogueName}) }}">{{ categoryItem.categoryCatalogue.catalogueTitle }}</a>
+                ::
+                {{ categoryItem.categoryTitle }}
+            </td>
+        </tr>
+    </table>
+    <div class="page">
+        {{ categoryItem.categoryDescription | raw }}
+        <div class="indent"></div>
+{% for productItem in categoryItem.products %}
+        <div class="catalogue">
+            <div class="title">
+                <a href="{{ path('productItem', {catalogueName: categoryItem.categoryCatalogue.catalogueName, categoryName: categoryItem.categoryName, id: productItem.productId}) }}">{{ productItem.productTitle }}</a>
+            </div>
+            <div class="image">
+                <a href="{{ path('productItem', {catalogueName: categoryItem.categoryCatalogue.catalogueName, categoryName: categoryItem.categoryName, id: productItem.productId}) }}">
+                    <img src="{{ productItem.productPicture.pictureImage }}" class="product" alt="{{ productItem.productTitle }}" title="{{ productItem.productTitle }}"/>
+                </a>
+            </div>
+            <div class="price">
+                <b>{{ productItem.productPrice }} р.</b>
+{% if productItem.productPriceOld %}
+                <s>{{ productItem.productPriceOld }} р.</s>
+{% endif %}
+                <a href="/cart"><img src="/image/basket.gif" alt="Купить" title="Купить"/></a>
+            </div>
+            <div class="description">
+                {{ productItem.productShortDescription }}
+            </div>
+        </div>
+{% endfor %}
+    </div>
+{% endblock %}

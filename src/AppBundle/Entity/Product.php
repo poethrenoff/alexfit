@@ -13,6 +13,8 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class Product
 {
+    const DEFAULT_PICTURE = '/upload/product/default.gif';
+    
     /**
      * @var int
      *
@@ -69,14 +71,14 @@ class Product
      * 
      * @ORM\Column(type="text", nullable=true)
      */
-    private $product_short_desctiption;
+    private $product_short_description;
 
     /**
      * @var string
      * 
      * @ORM\Column(type="text", nullable=true)
      */
-    private $product_full_desctiption;
+    private $product_full_description;
     
     /**
      * @var string
@@ -94,7 +96,8 @@ class Product
     private $product_active = true;
     
     /**
-     * @ORM\OneToMany(targetEntity="ProductPicture", mappedBy="product_picture")
+     * @ORM\OneToMany(targetEntity="ProductPicture", mappedBy="picture_product")
+     * @ORM\OrderBy({"picture_order" = "asc"})
      */
     private $pictures;
 
@@ -191,51 +194,51 @@ class Product
     }
 
     /**
-     * Set productShortDesctiption
+     * Set productShortDescription
      *
-     * @param string $productShortDesctiption
+     * @param string $productShortDescription
      *
      * @return Product
      */
-    public function setProductShortDesctiption($productShortDesctiption)
+    public function setProductShortDescription($productShortDescription)
     {
-        $this->product_short_desctiption = $productShortDesctiption;
+        $this->product_short_description = $productShortDescription;
 
         return $this;
     }
 
     /**
-     * Get productShortDesctiption
+     * Get productShortDescription
      *
      * @return string
      */
-    public function getProductShortDesctiption()
+    public function getProductShortDescription()
     {
-        return $this->product_short_desctiption;
+        return $this->product_short_description;
     }
 
     /**
-     * Set productFullDesctiption
+     * Set productFullDescription
      *
-     * @param string $productFullDesctiption
+     * @param string $productFullDescription
      *
      * @return Product
      */
-    public function setProductFullDesctiption($productFullDesctiption)
+    public function setProductFullDescription($productFullDescription)
     {
-        $this->product_full_desctiption = $productFullDesctiption;
+        $this->product_full_description = $productFullDescription;
 
         return $this;
     }
 
     /**
-     * Get productFullDesctiption
+     * Get productFullDescription
      *
      * @return string
      */
-    public function getProductFullDesctiption()
+    public function getProductFullDescription()
     {
-        return $this->product_full_desctiption;
+        return $this->product_full_description;
     }
 
     /**
@@ -368,6 +371,23 @@ class Product
         return $this->pictures;
     }
 
+    /**
+     * Get main picture
+     *
+     * @return \AppBundle\Entity\ProductPicture
+     */
+    public function getProductPicture()
+    {
+        if (count($this->pictures)) {
+            return $this->pictures->first();
+        }
+        
+        $picture = new \AppBundle\Entity\ProductPicture();
+        $picture->setPictureImage(self::DEFAULT_PICTURE);
+        
+        return $picture;
+    }
+    
     /**
      * Set productActive
      *

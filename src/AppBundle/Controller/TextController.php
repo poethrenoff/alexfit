@@ -23,8 +23,8 @@ class TextController extends Controller
     {
         $currentRoute = $request->get('_route');
         
-        $textItem = $this->getDoctrine()->getManager()->getRepository('AppBundle:Text')
-                ->findOneByTextName($currentRoute);
+        $textItem = $this->getDoctrine()->getManager()
+            ->getRepository('AppBundle:Text')->findOneByTextName($currentRoute);
         
         if (!$textItem) {
             throw new NotFoundHttpException('Страница не найдена');

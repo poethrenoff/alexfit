@@ -10,4 +10,8 @@ namespace AppBundle\Repository;
  */
 class CategoryRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function findOneByCategoryName($name)
+    {
+        return $this->findOneBy(array('category_active' => 1, 'category_name' => $name));
+    }
 }

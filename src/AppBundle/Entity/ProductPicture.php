@@ -23,7 +23,7 @@ class ProductPicture
     
     /**
      * @Assert\NotBlank()
-     * @ORM\ManyToOne(targetEntity="Product", inversedBy="pictures")
+     * @ORM\ManyToOne(targetEntity="Product",  inversedBy="pictures")
      * @ORM\JoinColumn(name="picture_product", referencedColumnName="product_id")
      */
     private $picture_product;

@@ -5,9 +5,13 @@
         <title>{% block title %}AlexFit: беговые дорожки, силовые тренажеры, велотренажеры, эллиптические тренажеры, профессиональные тренажеры, купить спортивный тренажер, интернет-магазин, товары для фитнеса{% endblock %}</title>
         <meta name="keywords" content="{% block keywords %}AlexFit тренажеры силовые тренажёры профессиональные беговые дорожки велотренажеры эллиптические тренажеры гребные степперы Alex WNQ Steel Flex BodySolid{% endblock %}"/>
         <meta name="description" content="{% block description %}Спортивный интернет-магазин AlexFit - беговые дорожки, велотренажеры, полный ассортимент тренажёров Alex, WNQ, Steel Flex, BodySolid, домашние и профессиональные спортивные тренажеры{% endblock %}"/>
-        <link rel="stylesheet" href="/css/index.css" type="text/css"/>
-{% block stylesheets %}{% endblock %}
-{% block javascripts %}{% endblock %}
+{% block stylesheets %}
+        <link rel="stylesheet" href="{{ asset('/css/index.css') }}" type="text/css"/>
+{% endblock %}
+{% block javascripts %}
+        <script src="{{ asset('/js/jquery.min.js') }}"></script>
+        <script src="{{ asset('/js/interface.js') }}"></script>
+{% endblock %}
     </head>
     <body>
         <table cellpadding="0" cellspacing="0" style="width: 100%">
@@ -19,13 +23,13 @@
                                 <table cellpadding="0" cellspacing="0" style="width: 100%">
                                     <tr>
                                         <td align="left" valign="bottom" style="width: 250px">
-                                            <a href="/"><img src="/image/logo.gif" alt="Alex"></a>
+                                            <a href="{{ path('index') }}"><img src="/image/logo.gif" alt="Alex"></a>
                                         </td>
                                         <td align="left" valign="bottom">
-                                            <a href="/"><img src="/image/www.gif" alt="Alex"></a>
+                                            <a href="{{ path('index') }}"><img src="/image/www.gif" alt="Alex"></a>
                                         </td>
                                         <td align="center" valign="middle" style="width: 100px">
-                                            <a href="/basket.php"><img src="/image/basket.gif" alt="Корзина"></a>
+                                            <a href="{{ path('index') }}"><img src="/image/basket.gif" alt="Корзина"></a>
                                         </td>
                                     </tr>
                                 </table>
@@ -50,176 +54,7 @@
                                         <td align="left" valign="middle" class="menu_empty"/>
                                     </tr>
 {% include 'AppBundle::menu.html.twig'%}
-                                    <tr>
-                                        <td align="left" valign="middle" class="menu_title menu_title_red">
-                                            ТРЕНАЖЕРЫ
-                                        </td>
-                                    </tr>
-
-                                    <tr>
-                                        <td align="left" valign="middle" class="menu_item menu_item_red" onmouseover="this.className = 'menu_item menu_item_red menu_item_selected'" onmouseout="this.className = 'menu_item menu_item_red'">
-                                            <a href="/products.php?tab=group&group_id=1">Кардиотренажеры</a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td align="left" valign="middle" class="menu_item menu_item_sub" onmouseover="this.className = 'menu_item menu_item_sub menu_item_selected'" onmouseout="this.className = 'menu_item menu_item_sub'">
-                                            <a href="/products.php?tab=category&amp;category_id=1">Беговые дорожки</a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td align="left" valign="middle" class="menu_item menu_item_sub" onmouseover="this.className = 'menu_item menu_item_sub menu_item_selected'" onmouseout="this.className = 'menu_item menu_item_sub'">
-                                            <a href="/products.php?tab=category&amp;category_id=2">Эллиптические</a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td align="left" valign="middle" class="menu_item menu_item_sub" onmouseover="this.className = 'menu_item menu_item_sub menu_item_selected'" onmouseout="this.className = 'menu_item menu_item_sub'">
-                                            <a href="/products.php?tab=category&amp;category_id=3">Велотренажеры</a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td align="left" valign="middle" class="menu_item menu_item_red" onmouseover="this.className = 'menu_item menu_item_red menu_item_selected'" onmouseout="this.className = 'menu_item menu_item_red'">
-                                            <a href="/products.php?tab=group&group_id=13">Тренажеры BodySolid</a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td align="left" valign="middle" class="menu_item menu_item_sub" onmouseover="this.className = 'menu_item menu_item_sub menu_item_selected'" onmouseout="this.className = 'menu_item menu_item_sub'">
-                                            <a href="/products.php?tab=category&amp;category_id=46">Мультистанции</a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td align="left" valign="middle" class="menu_item menu_item_sub" onmouseover="this.className = 'menu_item menu_item_sub menu_item_selected'" onmouseout="this.className = 'menu_item menu_item_sub'">
-                                            <a href="/products.php?tab=category&amp;category_id=47">PRO-CLUB LINE</a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td align="left" valign="middle" class="menu_item menu_item_sub" onmouseover="this.className = 'menu_item menu_item_sub menu_item_selected'" onmouseout="this.className = 'menu_item menu_item_sub'">
-                                            <a href="/products.php?tab=category&amp;category_id=48">Св. веса PRO CLUB</a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td align="left" valign="middle" class="menu_item menu_item_sub" onmouseover="this.className = 'menu_item menu_item_sub menu_item_selected'" onmouseout="this.className = 'menu_item menu_item_sub'">
-                                            <a href="/products.php?tab=category&amp;category_id=49">PRO DUAL LINE</a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td align="left" valign="middle" class="menu_item menu_item_sub" onmouseover="this.className = 'menu_item menu_item_sub menu_item_selected'" onmouseout="this.className = 'menu_item menu_item_sub'">
-                                            <a href="/products.php?tab=category&amp;category_id=50">Свободные веса</a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td align="left" valign="middle" class="menu_item menu_item_sub" onmouseover="this.className = 'menu_item menu_item_sub menu_item_selected'" onmouseout="this.className = 'menu_item menu_item_sub'">
-                                            <a href="/products.php?tab=category&amp;category_id=51">Скамьи и стойки</a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td align="left" valign="middle" class="menu_item menu_item_sub" onmouseover="this.className = 'menu_item menu_item_sub menu_item_selected'" onmouseout="this.className = 'menu_item menu_item_sub'">
-                                            <a href="/products.php?tab=category&amp;category_id=52">POWERLINE</a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td align="left" valign="middle" class="menu_item menu_item_sub" onmouseover="this.className = 'menu_item menu_item_sub menu_item_selected'" onmouseout="this.className = 'menu_item menu_item_sub'">
-                                            <a href="/products.php?tab=category&amp;category_id=53">Опции</a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td align="left" valign="middle" class="menu_item menu_item_red" onmouseover="this.className = 'menu_item menu_item_red menu_item_selected'" onmouseout="this.className = 'menu_item menu_item_red'">
-                                            <a href="/products.php?tab=group&group_id=14">Силовые тренажеры Steel Flex</a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td align="left" valign="middle" class="menu_item menu_item_sub" onmouseover="this.className = 'menu_item menu_item_sub menu_item_selected'" onmouseout="this.className = 'menu_item menu_item_sub'">
-                                            <a href="/products.php?tab=category&amp;category_id=45">Steel Flex Plate Load</a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td align="left" valign="middle" class="menu_item menu_item_sub" onmouseover="this.className = 'menu_item menu_item_sub menu_item_selected'" onmouseout="this.className = 'menu_item menu_item_sub'">
-                                            <a href="/products.php?tab=category&amp;category_id=54">Steel Flex Mega power</a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td align="left" valign="middle" class="menu_item menu_item_sub" onmouseover="this.className = 'menu_item menu_item_sub menu_item_selected'" onmouseout="this.className = 'menu_item menu_item_sub'">
-                                            <a href="/products.php?tab=category&amp;category_id=55">Steel Flex Neo</a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td align="left" valign="middle" class="menu_item menu_item_red" onmouseover="this.className = 'menu_item menu_item_red menu_item_selected'" onmouseout="this.className = 'menu_item menu_item_red'">
-                                            <a href="/products.php?tab=group&group_id=11">Силовые тренажеры WNQ Magnum</a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td align="left" valign="middle" class="menu_item menu_item_sub" onmouseover="this.className = 'menu_item menu_item_sub menu_item_selected'" onmouseout="this.className = 'menu_item menu_item_sub'">
-                                            <a href="/products.php?tab=category&amp;category_id=37">Блочные</a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td align="left" valign="middle" class="menu_item menu_item_red" onmouseover="this.className = 'menu_item menu_item_red menu_item_selected'" onmouseout="this.className = 'menu_item menu_item_red'">
-                                            <a href="/products.php?tab=group&group_id=3">Домашние силовые тренажеры</a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td align="left" valign="middle" class="menu_item menu_item_sub" onmouseover="this.className = 'menu_item menu_item_sub menu_item_selected'" onmouseout="this.className = 'menu_item menu_item_sub'">
-                                            <a href="/products.php?tab=category&amp;category_id=10">Мультистанции</a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td align="left" valign="middle" class="menu_item menu_item_sub" onmouseover="this.className = 'menu_item menu_item_sub menu_item_selected'" onmouseout="this.className = 'menu_item menu_item_sub'">
-                                            <a href="/products.php?tab=category&amp;category_id=43">Скамьи и стойки</a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td align="left" valign="middle" class="menu_item menu_item_red" onmouseover="this.className = 'menu_item menu_item_red menu_item_selected'" onmouseout="this.className = 'menu_item menu_item_red'">
-                                            <a href="/products.php?tab=group&group_id=5">Аксессуары</a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td align="left" valign="middle" class="menu_item menu_item_sub" onmouseover="this.className = 'menu_item menu_item_sub menu_item_selected'" onmouseout="this.className = 'menu_item menu_item_sub'">
-                                            <a href="/products.php?tab=category&amp;category_id=19">Гантели атлетические</a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td align="left" valign="middle" class="menu_item menu_item_sub" onmouseover="this.className = 'menu_item menu_item_sub menu_item_selected'" onmouseout="this.className = 'menu_item menu_item_sub'">
-                                            <a href="/products.php?tab=category&amp;category_id=25">Гантели аэробные</a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td align="left" valign="middle" class="menu_item menu_item_sub" onmouseover="this.className = 'menu_item menu_item_sub menu_item_selected'" onmouseout="this.className = 'menu_item menu_item_sub'">
-                                            <a href="/products.php?tab=category&amp;category_id=26">Диски</a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td align="left" valign="middle" class="menu_item menu_item_sub" onmouseover="this.className = 'menu_item menu_item_sub menu_item_selected'" onmouseout="this.className = 'menu_item menu_item_sub'">
-                                            <a href="/products.php?tab=category&amp;category_id=44">Грифы</a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td align="left" valign="middle" class="menu_item menu_item_sub" onmouseover="this.className = 'menu_item menu_item_sub menu_item_selected'" onmouseout="this.className = 'menu_item menu_item_sub'">
-                                            <a href="/products.php?tab=category&amp;category_id=56">Штанги</a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td align="left" valign="middle" class="menu_item menu_item_sub" onmouseover="this.className = 'menu_item menu_item_sub menu_item_selected'" onmouseout="this.className = 'menu_item menu_item_sub'">
-                                            <a href="/products.php?tab=category&amp;category_id=23">Стойки и рукоятки</a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td align="left" valign="middle" class="menu_item menu_item_sub" onmouseover="this.className = 'menu_item menu_item_sub menu_item_selected'" onmouseout="this.className = 'menu_item menu_item_sub'">
-                                            <a href="/products.php?tab=category&amp;category_id=20">Аэробика и фитнес</a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td align="left" valign="middle" class="menu_item menu_item_sub" onmouseover="this.className = 'menu_item menu_item_sub menu_item_selected'" onmouseout="this.className = 'menu_item menu_item_sub'">
-                                            <a href="/products.php?tab=category&amp;category_id=27">Мячи</a>
-                                        </td>
-                                    </tr>
-
-
-
-                                    <tr>
-                                        <td align="left" valign="middle" class="menu_separator menu_separator_red"/>
-                                    </tr>
-                                    <tr>
-                                        <td align="left" valign="middle" class="menu_empty"/>
-                                    </tr>
+{{ render(controller('AppBundle:Product:menu')) }}
                                     <tr>
                                         <td align="left" valign="middle" class="menu_title menu_title_blue">
                                             ЦЕНЫ

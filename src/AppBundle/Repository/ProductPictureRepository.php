@@ -10,4 +10,9 @@ namespace AppBundle\Repository;
  */
 class ProductPictureRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function findByPictureProduct($id)
+    {
+        return $this->findBy(array('picture_product' => $id),
+            array('picture_order' => 'asc'));
+    }
 }
