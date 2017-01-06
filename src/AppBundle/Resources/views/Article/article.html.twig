@@ -1,0 +1,21 @@
+{% extends 'AppBundle::base.html.twig' %}
+
+{% block body %}
+    <table cellpadding="0" cellspacing="0" style="width: 100%">
+        <tr>
+            <td align="left" valign="middle" class="menu_title menu_title">
+                Статьи
+            </td>
+        </tr>
+    </table>
+    <div class="page">
+{% for articleItem in articleList %}
+        <p class="p">
+            <b><a href="{{ path('articleItem', {id: articleItem.articleId}) }}">{{ articleItem.articleTitle }}</a></b>
+        </p>
+        <div style="margin-bottom: 20px">
+            {{ articleItem.articleAnnounce | raw }}
+        </div>
+{% endfor %}
+    </div>
+{% endblock %}

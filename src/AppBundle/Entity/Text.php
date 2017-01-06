@@ -27,7 +27,7 @@ class Text
      * @Assert\NotBlank()
      * @ORM\Column(type="string")
      */
-    private $text_tag;
+    private $text_title;
     
     /**
      * @var string
@@ -35,7 +35,7 @@ class Text
      * @Assert\NotBlank()
      * @ORM\Column(type="string")
      */
-    private $text_title;
+    private $text_name;
     
     /**
      * @var text
@@ -61,27 +61,27 @@ class Text
     }
 
     /**
-     * Set textTag
+     * Set textName
      *
-     * @param string $textTag
+     * @param string $textName
      *
      * @return Text
      */
-    public function setTextTag($textTag)
+    public function setTextName($textName)
     {
-        $this->text_tag = $textTag;
+        $this->text_name = $textName;
 
         return $this;
     }
 
     /**
-     * Get textTag
+     * Get textName
      *
      * @return string
      */
-    public function getTextTag()
+    public function getTextName()
     {
-        return $this->text_tag;
+        return $this->text_name;
     }
 
     /**

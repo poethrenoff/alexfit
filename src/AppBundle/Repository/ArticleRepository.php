@@ -10,4 +10,13 @@ namespace AppBundle\Repository;
  */
 class ArticleRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function findAll()
+    {
+        return $this->findBy(array('article_active' => 1));
+    }
+    
+    public function find($id)
+    {
+        return $this->findOneBy(array('article_id' => $id, 'article_active' => 1));
+    }
 }

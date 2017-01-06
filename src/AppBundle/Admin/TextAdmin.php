@@ -12,16 +12,16 @@ class TextAdmin extends AbstractAdmin
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
-            ->add('text_tag', 'text', array('label' => 'Метка'))
             ->add('text_title', 'text', array('label' => 'Заголовок'))
+            ->add('text_name', 'text', array('label' => 'Ссылка'))
             ->add('text_content', 'textarea', array('label' => 'Текст', 'attr' => array('class' => 'editor')));
     }
 
-    protected function configureDatagridFilters(DatagridMapper $datagridMapper)
+    protected function configureDanameridFilters(DatagridMapper $datagridMapper)
     {
         $datagridMapper
-            ->add('text_tag', null, array('label' => 'Метка'))
-            ->add('text_title', null, array('label' => 'Заголовок'));
+            ->add('text_title', null, array('label' => 'Ссылка'))
+            ->add('text_name', null, array('label' => 'Метка'));
     }
 
     protected function configureListFields(ListMapper $listMapper)
@@ -31,8 +31,8 @@ class TextAdmin extends AbstractAdmin
                 'label' => 'ID',
                 'header_style' => 'width: 10%'
             ))
-            ->add('text_tag', null, array('label' => 'Метка'))
-            ->addIdentifier('text_title', null, array('label' => 'Заголовок'));
+            ->addIdentifier('text_title', null, array('label' => 'Заголовок'))
+            ->add('text_name', null, array('label' => 'Ссылка'));
     }
     
     public function validate(ErrorElement $errorElement, $object)

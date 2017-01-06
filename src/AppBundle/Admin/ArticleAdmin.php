@@ -15,7 +15,7 @@ class ArticleAdmin extends AbstractAdmin
             ->add('article_title', 'text', array('label' => 'Название'))
             ->add('article_announce', 'textarea', array('label' => 'Анонс', 'attr' => array('class' => 'editor')))
             ->add('article_text', 'textarea', array('label' => 'Текст', 'attr' => array('class' => 'editor')))
-            ->add('article_active', 'checkbox', array('label' => 'Видимость'));
+            ->add('article_active', 'checkbox', array('label' => 'Видимость', 'required' => false));
     }
 
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
@@ -29,7 +29,8 @@ class ArticleAdmin extends AbstractAdmin
     {
         $listMapper
             ->add('article_id', null, array('label' => 'ID'))
-            ->addIdentifier('article_title', null, array('label' => 'Название'));
+            ->addIdentifier('article_title', null, array('label' => 'Название'))
+            ->add('article_active', null, array('label' => 'Видимость', 'editable' => true));
     }
     
     public function validate(ErrorElement $errorElement, $object)

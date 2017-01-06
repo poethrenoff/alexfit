@@ -28,7 +28,7 @@ class CatalogueAdmin extends AbstractAdmin
         $formMapper
             ->add('catalogue_description', 'textarea', array('label' => 'Описание', 'required' => false, 'attr' => array('class' => 'editor')))
             ->add('catalogue_order', 'integer', array('label' => 'Порядок'))
-            ->add('catalogue_active', 'checkbox', array('label' => 'Видимость'));
+            ->add('catalogue_active', 'checkbox', array('label' => 'Видимость', 'required' => false));
     }
     
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)

@@ -36,7 +36,7 @@ class ProductAdmin extends AbstractAdmin
             ->add('product_short_desctiption', 'textarea', array('label' => 'Краткое описание', 'required' => false, 'attr' => array('class' => 'editor')))
             ->add('product_full_desctiption', 'textarea', array('label' => 'Подробное описание', 'required' => false, 'attr' => array('class' => 'editor')))
             ->add('product_instruction_file', 'file', $instructionOptions)
-            ->add('product_active', 'checkbox', array('label' => 'Видимость'));
+            ->add('product_active', 'checkbox', array('label' => 'Видимость', 'required' => false));
     }
 
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)

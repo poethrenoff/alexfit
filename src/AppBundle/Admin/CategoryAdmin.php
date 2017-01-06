@@ -45,7 +45,7 @@ class CategoryAdmin extends AbstractAdmin
             ->add('category_description', 'textarea', array('label' => 'Описание', 'required' => false, 'attr' => array('class' => 'editor')))
             ->add('category_picture_file', 'file', $pictureOptions)
             ->add('category_order', 'integer', array('label' => 'Порядок'))
-            ->add('category_active', 'checkbox', array('label' => 'Видимость'));
+            ->add('category_active', 'checkbox', array('label' => 'Видимость', 'required' => false));
     }
 
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
