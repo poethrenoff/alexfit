@@ -14,4 +14,30 @@ class ProductRepository extends \Doctrine\ORM\EntityRepository
     {
         return $this->findOneBy(array('product_id' => $id, 'product_active' => 1));
     }
+    
+    public function findByText($text)
+    {
+        $qb = $this->createQueryBuilder('p')
+            ->select('p')
+            ->innerJoin('p.product_category', 'c')
+            ->where('p.product_active = :product_active')
+            ->andWhere('c.category_active = :category_active')
+            ->orderBy('p.product_price', 'asc')
+                ->setParameter('product_active', true)
+                ->setParameter('category_active', true);
+        
+        $words = $text !== '' ? preg_split('/\s+/isu', $text) : array();
+        foreach ($words as $wordIndex => $word) {
+            $qb->andWhere(
+                $qb->expr()->orX(
+                    $qb->expr()->like('lower(p.product_title)', 'lower(:word' . $wordIndex . ')'),
+                    $qb->expr()->like('lower(p.product_short_description)', 'lower(:word' . $wordIndex . ')'),
+                    $qb->expr()->like('lower(p.product_full_description)', 'lower(:word' . $wordIndex . ')')
+                )
+            );
+            $qb->setParameter('word' . $wordIndex, '%' . $word . '%');
+        }
+        
+        return $qb->getQuery()->getResult();
+    }
 }

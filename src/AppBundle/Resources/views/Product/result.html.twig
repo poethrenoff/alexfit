@@ -1,0 +1,18 @@
+{% extends 'AppBundle::base.html.twig' %}
+
+{% block body %}
+    <table cellpadding="0" cellspacing="0" style="width: 100%">
+        <tr>
+            <td align="left" valign="middle" class="menu_title menu_title">
+                Результаты поиска {% if text is not empty %} "{{ text }}" ({{ productList | length }}){% endif %}
+            </td>
+        </tr>
+    </table>
+    <div class="page">
+{% for productItem in productList %}
+        <p class="p">{{ loop.index }}. <a href="{{ path('productItem', {catalogueName: productItem.productCategory.categoryCatalogue.catalogueName, categoryName: productItem.productCategory.categoryName, id: productItem.productId}) }}">{{ productItem.productTitle }}</a></p>
+{% else %}
+        <h2 style="text-align: center">Ничего не найдено!</h2>
+{% endfor %}
+    </div>
+{% endblock %}

@@ -1,0 +1,39 @@
+{% extends 'AppBundle::base.html.twig' %}
+
+{% block body %}
+    <table cellpadding="0" cellspacing="0" style="width: 100%">
+        <tr>
+            <td align="left" valign="middle" class="menu_title menu_title">
+                Прайс-лист
+            </td>
+        </tr>
+    </table>
+    <div class="page">
+        <table cellpadding="2" cellspacing="1" style="width: 100%; background-color: #cccccc">
+{% for catalogueItem in catalogueList %} 
+            <tr style="background-color: #e0e0e0">
+                <td colspan="4">
+                    <p style="text-align: center; font-size: 12px; margin-top: 5px; margin-bottom: 5px"><b>{{ catalogueItem.catalogueTitle }}</b></p>
+                </td>
+            </tr>
+{% for categoryItem in catalogueItem.categories %}
+            <tr style="background-color: #e0e0e0">
+                <td colspan="4">
+                    <p style="text-indent: 30px; margin-top: 5px; margin-bottom: 5px"><b>{{ categoryItem.categoryShortTitle }}</b></p>
+                </td>
+            </tr>
+{% for productItem in categoryItem.products %}
+            <tr style="background-color: {% if loop.index % 2 %}#eeeeee{% else %}#e1e1e1{% endif %}">
+                <td style="width: 85%">
+                    <p style="margin: 0px"><a href="{{ path('productItem', {catalogueName: productItem.productCategory.categoryCatalogue.catalogueName, categoryName: productItem.productCategory.categoryName, id: productItem.productId}) }}" class="price">{{ productItem.productTitle }}</a></p>
+                </td>
+                <td style="width: 15%">
+                    <p style="text-align: center; margin: 0px"><b>{% if productItem.productPrice %}{{ productItem.productPrice }} р. {% else %}&mdash;{% endif %}</b></p>
+                </td>
+            </tr>
+{% endfor %}
+{% endfor %}
+{% endfor %}
+        </table>
+    </div>
+{% endblock %}

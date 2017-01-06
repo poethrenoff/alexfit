@@ -20,7 +20,7 @@
             </div>
             <div class="image">
                 <a href="{{ path('productItem', {catalogueName: categoryItem.categoryCatalogue.catalogueName, categoryName: categoryItem.categoryName, id: productItem.productId}) }}">
-                    <img src="{{ productItem.productPicture.pictureImage }}" class="product" alt="{{ productItem.productTitle }}" title="{{ productItem.productTitle }}"/>
+                    <img src="{{ web_image(productItem.productPicture.pictureImage).cropResize(180, 180) }}" class="product" alt="{{ productItem.productTitle }}" title="{{ productItem.productTitle }}"/>
                 </a>
             </div>
             <div class="price">

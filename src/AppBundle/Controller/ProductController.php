@@ -36,7 +36,7 @@ class ProductController extends Controller
             throw new NotFoundHttpException('Страница не найдена');
         }
         
-        return $this->render('AppBundle::Product/catalogueItem.html.twig', array(
+        return $this->render('AppBundle::Product/catalogue.html.twig', array(
             'catalogueItem' => $catalogueItem
         ));
     }
@@ -55,7 +55,7 @@ class ProductController extends Controller
             throw new NotFoundHttpException('Страница не найдена');
         }
         
-        return $this->render('AppBundle::Product/categoryItem.html.twig', array(
+        return $this->render('AppBundle::Product/category.html.twig', array(
             'categoryItem' => $categoryItem
         ));
     }
@@ -74,8 +74,43 @@ class ProductController extends Controller
             throw new NotFoundHttpException('Страница не найдена');
         }
         
-        return $this->render('AppBundle::Product/productItem.html.twig', array(
+        return $this->render('AppBundle::Product/product.html.twig', array(
             'productItem' => $productItem
+        ));
+    }
+    
+    /**
+     * Search result
+     * 
+     * @Route("/search", name="search")
+     */
+    public function searchAction(Request $request)
+    {
+        $productList = array();
+        
+        $text = $request->query->get('text');
+        if ($text !== '') {
+            $productList = $this->getDoctrine()->getManager()
+                ->getRepository('AppBundle:Product')->findByText($text);
+        }
+        
+        return $this->render('AppBundle::Product/result.html.twig', array(
+            'productList' => $productList, 'text' => $text
+        ));
+    }
+    
+    /**
+     * Pricelist
+     * 
+     * @Route("/price", name="price")
+     */
+    public function priceAction(Request $request)
+    {
+        $catalogueList = $this->getDoctrine()->getManager()
+            ->getRepository('AppBundle:Catalogue')->findAll();
+        
+        return $this->render('AppBundle::Product/price.html.twig', array(
+           'catalogueList' => $catalogueList
         ));
     }
 }

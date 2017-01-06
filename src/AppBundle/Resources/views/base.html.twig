@@ -45,8 +45,8 @@
                                     </tr>
                                     <tr>
                                         <td align="center" valign="middle" class="menu_item menu_item_search" style="padding: 0px">
-                                            <form method="post" id="search" action="search.php" onsubmit="return forms['search'].search_text.value.length > 0">
-                                                <input type="text" class="text" name="search_text" value="" style="width: 130px"/>
+                                            <form method="get" action="{{ path('search') }}">
+                                                <input type="text" class="text" name="text" value="" style="width: 130px"/>
                                             </form>
                                         </td>
                                     </tr>
@@ -62,12 +62,12 @@
                                     </tr>
                                     <tr>
                                         <td align="left" valign="middle" class="menu_item menu_item_blue" onmouseover="this.className = 'menu_item menu_item_blue menu_item_selected'" onmouseout="this.className = 'menu_item menu_item_blue'">
-                                            <a href="subscribe.php">Рассылка по e-mail</a>
+                                            <a href="{{ path('subscribe') }}">Рассылка по e-mail</a>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td align="left" valign="middle" class="menu_item menu_item_blue" onmouseover="this.className = 'menu_item menu_item_blue menu_item_selected'" onmouseout="this.className = 'menu_item menu_item_blue'">
-                                            <a href="price.php">Прайс-лист</a>
+                                            <a href="{{ path('price') }}">Прайс-лист</a>
                                         </td>
                                     </tr>
                                     <tr>

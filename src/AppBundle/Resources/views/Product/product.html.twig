@@ -19,12 +19,12 @@
                     <div class="product_image">
                         <div class="thumbnail">
 {% for pictureItem in productItem.pictures %}
-                            <a href=""><img src="{{ pictureItem.pictureImage }}" style="max-width: 50px; max-height: 50px;" /></a>
+                            <a href=""><img src="{{ web_image(pictureItem.pictureImage).zoomCrop(50, 50) }}" /></a>
 {% endfor %}
                         </div>
                         <div class="gallery">
 {% for pictureItem in productItem.pictures %}
-                            <a data-lightbox="product" href="{{ pictureItem.pictureImage }}"><img src="{{ pictureItem.pictureImage }}" style="max-width: 300px; max-height: 300px;" /></a>
+                            <a data-lightbox="product" href="{{ pictureItem.pictureImage }}"><img src="{{ web_image(pictureItem.pictureImage).cropResize(330, 330) }}" /></a>
 {% endfor %}
                         </div>
 
@@ -52,7 +52,7 @@
                     </div>
 
                     <div class="price">
-                        <b>Цена: {{ productItem.productPrice }} р.</b>
+                        <b>Цена: {% if productItem.productPrice %}{{ productItem.productPrice }} р. {% else %}уточняйте у менеджера{% endif %}</b>
 {% if productItem.productPriceOld %}
                         <s>{{ productItem.productPriceOld }} р.</s>
 {% endif %}

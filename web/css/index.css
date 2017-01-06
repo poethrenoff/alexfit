@@ -75,8 +75,6 @@ img {
 
 img.product {
     border: 1px solid #103B59;
-    max-width: 140px;
-    max-height: 140px;
 }
 
 ul, ol {
@@ -222,7 +220,6 @@ p.setlinks, p.setlinks a {
 .page .catalogue {
     display: inline-table;
     width: 225px;
-    height: 180px;
     margin: 0px 20px 20px 0px;
 }
 .page .catalogue .title {
@@ -231,6 +228,8 @@ p.setlinks, p.setlinks a {
     text-align: center;
 }
 .page .catalogue .image {
+    height: 180px;
+    margin-bottom: 10px;
     text-align: center;
 }
 .page .description {
@@ -239,7 +238,7 @@ p.setlinks, p.setlinks a {
 }
     .page .price b {
         float: left;
-        margin-left: 20px;
+        margin-left: 10px;
         margin-top: 10px;
         display: inline-block;
     }

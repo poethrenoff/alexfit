@@ -13,7 +13,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class Product
 {
-    const DEFAULT_PICTURE = '/upload/product/default.gif';
+    const DEFAULT_PICTURE = '/image/default.gif';
     
     /**
      * @var int
