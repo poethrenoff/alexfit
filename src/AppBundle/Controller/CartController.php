@@ -19,8 +19,7 @@ class CartController extends Controller
         
         $productList = array();
         foreach ($cart->getItems() as $item ) {
-            $productList[$item->id] = $this->getDoctrine()->getManager()
-                ->getRepository('AppBundle:Product')->find($item->id);
+            $productList[$item->id] = $productItem = $this->getProduct($item->id);
         }
         
         return $this->render('AppBundle::Cart/cart.html.twig', array(
@@ -47,12 +46,7 @@ class CartController extends Controller
      */
     public function addAction(Request $request, $id)
     {
-        $productItem = $this->getDoctrine()->getManager()
-            ->getRepository('AppBundle:Product')->find($id);
-        
-        if (!$productItem) {
-            throw new NotFoundHttpException('Страница не найдена');
-        }
+        $productItem = $this->getProduct($id);
         
         $quantity = max(1, intval($request->query->get('quantity')));
         
@@ -62,57 +56,33 @@ class CartController extends Controller
     }
 
     /**
-     * Save cart
+     * Inc product
      * 
-     * @Route("/cart/save", name="cart.save")
+     * @Route("/cart/inc/{id}", name="cart.inc")
      */
-    public function saveAction(Request $request)
+    public function incAction(Request $request, $id)
     {
-        if ($request->isMethod('post')) {
-            $cart = $request->get('cart');
-            
-            if (is_array($cart)) {
-                $this->get('cart')->clear();
-                
-                foreach ($cart as $id => $quantity) {
-                    $productItem = $this->getDoctrine()->getManager()
-                        ->getRepository('AppBundle:Product')->find($id);
+        $quantity = max(1, intval($request->query->get('quantity')));
+        
+        $this->get('cart')->inc($id, $quantity);
+        
+        return $this->infoAction($request);
+    }
 
-                    if (!$productItem) {
-                        throw new NotFoundHttpException('Страница не найдена');
-                    }                    
-                    
-                    $quantity = max(1, intval($quantity));
-                    $this->get('cart')->add(
-                        $productItem->getProductId(), $productItem->getProductPrice(), $quantity
-                    );
-                }
-            }
-        }
+    /**
+     * Dec product
+     * 
+     * @Route("/cart/dec/{id}", name="cart.dec")
+     */
+    public function decAction(Request $request, $id)
+    {
+        $quantity = max(1, intval($request->query->get('quantity')));
+        
+        $this->get('cart')->dec($id, $quantity);
         
         return $this->infoAction($request);
     }
     
-    
-    
-    protected function actionSave()
-    {
-        if (!empty($_POST)) {
-            if (isset($_POST['quantity']) && is_array($_POST['quantity'])) {
-                Cart::factory()->clear();
-
-                foreach ($_POST['quantity'] as $id => $quantity) {
-                    $product = $this->getProduct($id);
-                    $quantity = max(1, intval($quantity));
-                    Cart::factory()->add(
-                        $product->getId(), $product->getProductPrice(), $quantity
-                    );
-                }
-            }
-        }
-        $this->actionInfo();
-    }
-
     /**
      * Delete product
      * 
@@ -135,5 +105,20 @@ class CartController extends Controller
         $this->get('cart')->clear();
         
         return $this->redirectToRoute('cart');
+    }
+    
+    /**
+     * Get product
+     */
+    protected function getProduct($id)
+    {
+        $productItem = $this->getDoctrine()->getManager()
+            ->getRepository('AppBundle:Product')->find($id);
+
+        if (!$productItem) {
+            throw new NotFoundHttpException('Страница не найдена');
+        }
+        
+        return $productItem;
     }
 }

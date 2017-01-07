@@ -1,10 +1,5 @@
 {% extends 'AppBundle::base.html.twig' %}
 
-{% block javascripts %}
-{{ parent() }}
-        <script type="text/javascript" src="/js/jquery.form.js"></script>
-{% endblock %}
-
 {% block body %}
     <table cellpadding="0" cellspacing="0" style="width: 100%">
         <tr>
@@ -17,73 +12,68 @@
 {% if cart.sum == 0 %}
         <h2 style="text-align: center">Ваша корзина пуста!</h2>
 {% else %}
-        <form id="cart" method="post" action="{{ path('cart.save') }}">
-            <table cellpadding="3" cellspacing="0" style="width: 100%; border-collapse: collapse">
-                <tr valign="middle" style="height: 20px">
-                    <td style="width: 15px; border: 1px solid #bbbbbb">
-                        <p class="c">№</p>
-                    </td>
-                    <td style="border: 1px solid #bbbbbb">
-                        <p class="c">Товар</p>
-                    </td>
-                    <td style="width: 60px; border: 1px solid #bbbbbb">
-                        <p class="c">Цена</p>
-                    </td>
-                    <td style="width: 60px; border: 1px solid #bbbbbb">
-                        <p class="c">Кол-во</p>
-                    </td>
-                    <td style="width: 60px; border: 1px solid #bbbbbb">
-                        <p class="c">Стоимость</p>
-                    </td>
-                    <td style="width: 60px; border: 1px solid #bbbbbb">
-                        <p class="c">Изменить</p>
-                    </td>
-                    <td style="width: 60px; border: 1px solid #bbbbbb">
-                        <p class="c">Удалить</p>
-                    </td>
-                </tr>
+        <table id="cart" cellpadding="3" cellspacing="0" style="width: 100%; border-collapse: collapse">
+            <tr valign="middle" style="height: 20px">
+                <td style="width: 15px; border: 1px solid #bbbbbb">
+                    <p class="c">№</p>
+                </td>
+                <td style="border: 1px solid #bbbbbb">
+                    <p class="c">Товар</p>
+                </td>
+                <td style="width: 60px; border: 1px solid #bbbbbb">
+                    <p class="c">Цена</p>
+                </td>
+                <td style="width: 60px; border: 1px solid #bbbbbb">
+                    <p class="c">Кол-во</p>
+                </td>
+                <td style="width: 60px; border: 1px solid #bbbbbb">
+                    <p class="c">Стоимость</p>
+                </td>
+                <td style="width: 60px; border: 1px solid #bbbbbb">
+                    <p class="c">Изменить</p>
+                </td>
+                <td style="width: 60px; border: 1px solid #bbbbbb">
+                    <p class="c">Удалить</p>
+                </td>
+            </tr>
 {% for item in cart.items %}
-                    <tr valign="middle" style="height: 30px">
-                        <td style="border: 1px solid #bbbbbb">
-                            <p class="r">{{ loop.index }}.</p>
-                        </td>
-                        <td style="border: 1px solid #bbbbbb">
-                            <p>{{ productList[item.id].productTitle }}</p>
-                        </td>
-                        <td style="border: 1px solid #bbbbbb">
-                            <p class="r">{{ item.price }}</p>
-                        </td>
-                        <td style="border: 1px solid #bbbbbb">
-                            <input type="hidden" value="{{ item.price }}" name="price[{{ item.id }}]" disabled="disabled"/>
-                            <input type="text" value="{{ item.quantity }}" name="cart[{{ item.id }}]" class="basket" readonly="readonly"/>
-                        </td>
-                        <td style="border: 1px solid #bbbbbb" class="cost">
-                            <p class="r">{{ item.price * item.quantity }}</p>
-                        </td>
-                        <td style="border: 1px solid #bbbbbb">
-                            <p class="c"><a href="" onclick="incItem($(this)); return false"><img src="/image/plus.gif" alt="Увеличить" title="Увеличить"/></a> / <a href="" onclick="decItem($(this)); return false"><img src="/image/minus.gif" alt="Уменьшить" title="Уменьшить"/></a></p>
-                        </td>
-                        <td style="border: 1px solid #bbbbbb">
-                            <p class="c"><a href="{{ path('cart.delete', {id: item.id}) }}"><img src="/image/delete.gif" alt="Удалить" title="Удалить"/></a></p>
-                        </td>
-                    </tr>
+            <tr valign="middle" style="height: 30px">
+                <td style="border: 1px solid #bbbbbb">
+                    <p class="r">{{ loop.index }}.</p>
+                </td>
+                <td style="border: 1px solid #bbbbbb">
+                    <p>{{ productList[item.id].productTitle }}</p>
+                </td>
+                <td style="border: 1px solid #bbbbbb" class="price">
+                    <p class="r">{{ item.price }}</p>
+                </td>
+                <td style="border: 1px solid #bbbbbb" class="quantity">
+                    <p class="r">{{ item.quantity }}</p>
+                </td>
+                <td style="border: 1px solid #bbbbbb" class="cost">
+                    <p class="r">{{ item.price * item.quantity }}</p>
+                </td>
+                <td style="border: 1px solid #bbbbbb">
+                    <p class="c"><a href="{{ path('cart.inc', {id: item.id}) }}" onclick="return incItem($(this));"><img src="/image/plus.gif" alt="Увеличить" title="Увеличить"/></a> / <a href="{{ path('cart.dec', {id: item.id}) }}" onclick="return decItem($(this));"><img src="/image/minus.gif" alt="Уменьшить" title="Уменьшить"/></a></p>
+                </td>
+                <td style="border: 1px solid #bbbbbb">
+                    <p class="c"><a href="{{ path('cart.delete', {id: item.id}) }}"><img src="/image/delete.gif" alt="Удалить" title="Удалить"/></a></p>
+                </td>
+            </tr>
 {% endfor %}
-                <tr valign="middle" style="height: 30px">
-                    <td colspan="3">
-                        <p class="r"><b>Общая сумма заказа:</b></p>
-                    </td>
-                    <td colspan="2" class="cost">
-                        <p class="r"><b>{{ cart.sum }} р.</b></p>
-                    </td>
-                    <td colspan="2"/>
-                </tr>		
-            </table>
-            <input type="button" value="Оформить" onclick="window.location.href = '{{ path('cart') }}';" class="button"/>
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            <input type="button" value="Очистить" onclick="if (confirm('Вы уверены, что хотите очистить корзину?')) {
-                        window.location.href = '{{ path('cart.clear') }}';
-                    }" class="button"/>
-        </form>
+            <tr valign="middle" style="height: 30px">
+                <td colspan="3">
+                    <p class="r"><b>Общая сумма заказа:</b></p>
+                </td>
+                <td colspan="2" class="cost">
+                    <p class="r"><b>{{ cart.sum }} р.</b></p>
+                </td>
+                <td colspan="2"/>
+            </tr>		
+        </table>
+        <input type="button" value="Оформить" onclick="window.location.href = '{{ path('cart') }}';" class="button"/>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <input type="button" value="Очистить" onclick="if (confirm('Вы уверены, что хотите очистить корзину?')) { window.location.href = '{{ path('cart.clear') }}'; }" class="button"/>
 {% endif %}
     </div>
 {% endblock %}

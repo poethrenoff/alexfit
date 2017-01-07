@@ -54,6 +54,22 @@ class Cart
         $this->save();
     }
     
+    public function inc($id, $quantity = 1)
+    {
+        if (isset($this->items[$id])) {
+            $this->items[$id]->quantity += $quantity;
+        }
+        $this->save();
+    }
+    
+    public function dec($id, $quantity = 1)
+    {
+        if (isset($this->items[$id]) && ($this->items[$id]->quantity > $quantity)) {
+            $this->items[$id]->quantity -= $quantity;
+        }
+        $this->save();
+    }
+    
     public function in($id)
     {
         return isset($this->items[$id]);
