@@ -30,13 +30,12 @@ class SubscribeController extends Controller
         $form->handleRequest($request);
         
         if ($form->isSubmitted() && $form->isValid()) {
-            $preference = $this->getDoctrine()->getManager()
-                ->getRepository('AppBundle:Preference');
+            $preference = $this->get('preference');
             
-            $from_email = $preference->findByName('from_email')->getPreferenceValue();           
-            $from_name = $preference->findByName('from_name')->getPreferenceValue();           
-            $subscribe_email = $preference->findByName('subscribe_email')->getPreferenceValue();           
-            $subscribe_subject = $preference->findByName('subscribe_subject')->getPreferenceValue();           
+            $from_email = $preference->get('from_email');           
+            $from_name = $preference->get('from_name');           
+            $subscribe_email = $preference->get('subscribe_email');           
+            $subscribe_subject = $preference->get('subscribe_subject');           
             
             $message = \Swift_Message::newInstance()
                 ->setSubject($subscribe_subject)

@@ -2,7 +2,7 @@
     <b>E-mail</b>: {{ subscribe.email }}<br/>
     <b>Фамилия, имя, отчество</b>: {{ subscribe.name }}<br/>
     <b>Название компании</b>: {{ subscribe.company }}<br/>
-    <b>Тип компании</b>: {{ types[subscribe.type] }}<br/>
+    <b>Тип компании</b>: {% if subscribe.type is not empty %}{{ types[subscribe.type] }}{% endif %}<br/>
     <b>Телефон</b>: {{ subscribe.phone }}<br/>
     <b>Факс</b>: {{ subscribe.fax }}<br/>
     <b>URL сайта</b>: {{ subscribe.url}}

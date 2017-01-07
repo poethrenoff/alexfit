@@ -28,8 +28,8 @@
                                         <td align="left" valign="bottom">
                                             <a href="{{ path('index') }}"><img src="/image/www.gif" alt="Alex"></a>
                                         </td>
-                                        <td align="center" valign="middle" style="width: 100px">
-                                            <a href="{{ path('index') }}"><img src="/image/basket.gif" alt="Корзина"></a>
+                                        <td align="center" valign="middle" style="width: 200px">
+{{ render(controller('AppBundle:Cart:info')) }}
                                         </td>
                                     </tr>
                                 </table>

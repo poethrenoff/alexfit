@@ -8,7 +8,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * Preference
  * 
  * @ORM\Table(name="preference")
- * @ORM\Entity(repositoryClass="AppBundle\Repository\PreferenceRepository")
+ * @ORM\Entity
  */
 class Preference
 {

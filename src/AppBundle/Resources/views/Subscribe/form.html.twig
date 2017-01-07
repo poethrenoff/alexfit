@@ -54,7 +54,7 @@
 
             <tr valign="top" style="height: 30px">
                 <td>
-                    <p><b>Код города, телефон:</b><br/>(для юрлиц обязательно)</p>
+                    <p><b>Телефон:</b><br/>(для юрлиц обязательно)</p>
                 </td>
                 <td align="left">
                     {{ form_widget(form.phone) }}
@@ -63,7 +63,7 @@
             </tr>
             <tr valign="top" style="height: 30px">
                 <td>
-                    <p><b>Код города, факс:</b><br/>(для юрлиц обязательно)</p>
+                    <p><b>Факс:</b><br/>(для юрлиц обязательно)</p>
                 </td>
                 <td align="left">
                     {{ form_widget(form.fax) }}
@@ -77,6 +77,15 @@
                 <td align="left">
                     {{ form_widget(form.url) }}
                     {{ form_errors(form.url) }}
+                </td>
+            </tr>
+            <tr valign="top" style="height: 30px">
+                <td>
+                    <p><b>Введите код с картинки:</b></p>
+                </td>
+                <td align="left">
+                    {{ form_widget(form.captcha) }}
+                    {{ form_errors(form.captcha) }}
                 </td>
             </tr>
             <tr valign="top" style="height: 30px">

@@ -26,7 +26,8 @@ class AppKernel extends Kernel
             new Sonata\AdminBundle\SonataAdminBundle(),
             
             new Gregwar\ImageBundle\GregwarImageBundle(),
-        
+            new Gregwar\CaptchaBundle\GregwarCaptchaBundle(),
+            
             new AppBundle\AppBundle(),
         ];
 

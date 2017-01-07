@@ -315,3 +315,11 @@ form li {
     color: #dd0000;
 }
 
+a.cart {
+    display: block;
+    width: 250px;
+    height: 20px;
+    padding: 6px 30px 0px 0px;
+    text-align: right;
+    background: url('/image/basket.gif') no-repeat right top;
+}

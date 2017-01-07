@@ -1,4 +1,12 @@
 services:
+    cart:
+        class: AppBundle\Lib\Cart
+        arguments: ['@session']
+    
+    preference:
+        class:     AppBundle\Lib\Preference
+        arguments: ['@doctrine.orm.entity_manager']
+
     admin.text:
         class: AppBundle\Admin\TextAdmin
         arguments: [~, AppBundle\Entity\Text, ~]

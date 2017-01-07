@@ -78,3 +78,9 @@ gregwar_image:
     cache_dir:  "upload/cache"
     fallback_image: "%kernel.root_dir%/../web/image/default.gif"
     throw_exception: false
+
+# Gregwar Captcha Configuration
+gregwar_captcha:
+    quality: 90
+    ignore_all_effects: true
+    

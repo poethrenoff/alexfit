@@ -28,7 +28,7 @@
 {% if productItem.productPriceOld %}
                 <s>{{ productItem.productPriceOld }} р.</s>
 {% endif %}
-                <a href="/cart"><img src="/image/basket.gif" alt="Купить" title="Купить"/></a>
+                <a href="{{ path('cart.add', {id: productItem.productId}) }}" onclick="return buyItem($(this));"><img src="/image/basket.gif" alt="Купить" title="Купить"/></a>
             </div>
             <div class="description">
                 {{ productItem.productShortDescription }}
