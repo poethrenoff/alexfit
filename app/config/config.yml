@@ -51,6 +51,8 @@ doctrine:
         user:     "%database_user%"
         password: "%database_password%"
         charset:  UTF8
+        options:
+            1002: "SET NAMES 'UTF8' COLLATE 'utf8_unicode_ci'"
         # if using pdo_sqlite as your database driver:
         #   1. add the path in parameters.yml
         #     e.g. database_path: "%kernel.root_dir%/data/data.db3"
@@ -75,9 +77,9 @@ gregwar_image:
     cache_dir:  "upload/cache"
     fallback_image: "%kernel.root_dir%/../web/image/default.gif"
     throw_exception: false
+    web_dir: %kernel.root_dir%/../web
 
 # Gregwar Captcha Configuration
 gregwar_captcha:
     quality: 90
     ignore_all_effects: true
-    
