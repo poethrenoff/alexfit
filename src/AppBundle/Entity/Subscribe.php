@@ -2,7 +2,7 @@
 namespace AppBundle\Entity;
 
 use Symfony\Component\Validator\Constraints as Assert;
-use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Context\ExecutionContext;
 
 /**
  * Subscribe
@@ -15,52 +15,52 @@ class Subscribe
      * @Assert\Email(message="Неверное значение email")
      * @Assert\NotBlank(message="Поле обязательно к заполнению")
      */
-    private $email;
+    private $subscribe_email;
 
     /**
      * @var string
      *
      * @Assert\NotBlank(message="Поле обязательно к заполнению")
      */
-    private $name;
+    private $subscribe_person;
 
     /**
      * @var string
      */
-    private $company;
+    private $subscribe_company;
 
     /**
      * @var string
      * 
      * @Assert\Choice({"wholesale", "retail"}, message="Неверное значение типа компании")
      */
-    private $type;
+    private $subscribe_type;
 
     /**
      * @var string
      */
-    private $phone;
+    private $subscribe_phone;
 
     /**
      * @var string
      */
-    private $fax;
+    private $subscribe_fax;
 
     /**
      * @var string
      */
-    private $url;
+    private $subscribe_url;
 
     /**
      * Set email
      *
-     * @param string $email
+     * @param string $subscribeEmail
      *
      * @return Subscribe
      */
-    public function setEmail($email)
+    public function setSubscribeEmail($subscribeEmail)
     {
-        $this->email = $email;
+        $this->subscribe_email = $subscribeEmail;
 
         return $this;
     }
@@ -70,45 +70,45 @@ class Subscribe
      *
      * @return string
      */
-    public function getEmail()
+    public function getSubscribeEmail()
     {
-        return $this->email;
+        return $this->subscribe_email;
     }
 
     /**
-     * Set name
+     * Set person
      *
-     * @param string $name
+     * @param string $subscribePerson
      *
      * @return Subscribe
      */
-    public function setName($name)
+    public function setSubscribePerson($subscribePerson)
     {
-        $this->name = $name;
+        $this->subscribe_person = $subscribePerson;
 
         return $this;
     }
 
     /**
-     * Get name
+     * Get person
      *
      * @return string
      */
-    public function getName()
+    public function getSubscribePerson()
     {
-        return $this->name;
+        return $this->subscribe_person;
     }
 
     /**
      * Set company
      *
-     * @param string $company
+     * @param string $subscribeCompany
      *
      * @return Subscribe
      */
-    public function setCompany($company)
+    public function setSubscribeCompany($subscribeCompany)
     {
-        $this->company = $company;
+        $this->subscribe_company = $subscribeCompany;
 
         return $this;
     }
@@ -118,21 +118,21 @@ class Subscribe
      *
      * @return string
      */
-    public function getCompany()
+    public function getSubscribeCompany()
     {
-        return $this->company;
+        return $this->subscribe_company;
     }
 
     /**
      * Set type
      *
-     * @param string $type
+     * @param string $subscribeType
      *
      * @return Subscribe
      */
-    public function setType($type)
+    public function setSubscribeType($subscribeType)
     {
-        $this->type = $type;
+        $this->subscribe_type = $subscribeType;
 
         return $this;
     }
@@ -142,21 +142,21 @@ class Subscribe
      *
      * @return string
      */
-    public function getType()
+    public function getSubscribeType()
     {
-        return $this->type;
+        return $this->subscribe_type;
     }
 
     /**
      * Set phone
      *
-     * @param string $phone
+     * @param string $subscribePhone
      *
      * @return Subscribe
      */
-    public function setPhone($phone)
+    public function setSubscribePhone($subscribePhone)
     {
-        $this->phone = $phone;
+        $this->subscribe_phone = $subscribePhone;
 
         return $this;
     }
@@ -166,21 +166,21 @@ class Subscribe
      *
      * @return string
      */
-    public function getPhone()
+    public function getSubscribePhone()
     {
-        return $this->phone;
+        return $this->subscribe_phone;
     }
 
     /**
      * Set fax
      *
-     * @param string $fax
+     * @param string $subscribeFax
      *
      * @return Subscribe
      */
-    public function setFax($fax)
+    public function setSubscribeFax($subscribeFax)
     {
-        $this->fax = $fax;
+        $this->subscribe_fax = $subscribeFax;
 
         return $this;
     }
@@ -190,21 +190,21 @@ class Subscribe
      *
      * @return string
      */
-    public function getFax()
+    public function getSubscribeFax()
     {
-        return $this->fax;
+        return $this->subscribe_fax;
     }
 
     /**
      * Set url
      *
-     * @param string $url
+     * @param string $subscribeUrl
      *
      * @return Subscribe
      */
-    public function setUrl($url)
+    public function setSubscribeUrl($subscribeUrl)
     {
-        $this->url = $url;
+        $this->subscribe_url = $subscribeUrl;
 
         return $this;
     }
@@ -214,8 +214,32 @@ class Subscribe
      *
      * @return string
      */
-    public function getUrl()
+    public function getSubscribeUrl()
     {
-        return $this->url;
+        return $this->subscribe_url;
     }
+    
+    /**
+     * @Assert\Callback
+     */
+    public function validate(ExecutionContext $context, $payload)
+    {
+        if ($this->getSubscribeCompany()) {
+            if (empty($this->getSubscribeType())) {
+                $context->buildViolation('Поле обязательно к заполнению')
+                    ->atPath('subscribe_type')
+                    ->addViolation();
+            }
+            if (empty($this->getSubscribePhone())) {
+                $context->buildViolation('Поле обязательно к заполнению')
+                    ->atPath('subscribe_phone')
+                    ->addViolation();
+            }
+            if (empty($this->getSubscribeFax())) {
+                $context->buildViolation('Поле обязательно к заполнению')
+                    ->atPath('subscribe_fax')
+                    ->addViolation();
+            }
+        } 
+    }    
 }

@@ -1,0 +1,19 @@
+<p>Внимание! В интернет-магазин AlexFit поступил новый заказ №{{ purchase.purchaseId }}</p>
+
+<p>
+{% for purchaseItem in purchase.items %}
+    {{ loop.index }}. {{ purchaseItem.itemProduct.productTitle }}: {{ purchaseItem.itemQuantity }} x {{ purchaseItem.itemPrice }} ({{ purchaseItem.itemQuantity * purchaseItem.itemPrice }} р.)<br/>
+{% endfor %}
+</p>
+
+<p>Общая стоимость заказа: {{ purchase.purchaseSum }} р.</p>
+
+<p>
+    ФИО: {{ purchase.purchasePerson }}<br/>
+    Email: {{ purchase.purchaseEmail }}<br/>
+    Телефон: {{ purchase.purchasePhone }}<br/>
+    Адрес: {{ purchase.purchaseAddress }}<br/>
+    Комментарии: {{ purchase.purchaseComment }}
+</p>
+
+<p><a href="{{ url('admin_app_purchase_list') }}">Перейти к редактированию заказов</a></p>

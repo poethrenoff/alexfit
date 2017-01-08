@@ -62,9 +62,22 @@ services:
         tags:
             - { name: sonata.admin, manager_type: orm, label: Изображения, group: Каталог }
 
+    admin.purchase:
+        class: AppBundle\Admin\PurchaseAdmin
+        arguments: [~, AppBundle\Entity\Purchase, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: Заказы, group: Заказы }
+        calls:
+            - [ addChild, ['@admin.purchase_item'] ]
+            
+    admin.purchase_item:
+        class: AppBundle\Admin\PurchaseItemAdmin
+        arguments: [~, AppBundle\Entity\PurchaseItem, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: Позиции, group: Заказы }
+
     admin.preference:
         class: AppBundle\Admin\PreferenceAdmin
         arguments: [~, AppBundle\Entity\Preference, ~]
         tags:
             - { name: sonata.admin, manager_type: orm, label: Настройки, group: Система }
-

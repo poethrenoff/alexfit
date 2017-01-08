@@ -14,6 +14,11 @@ class ProductAdmin extends AbstractAdmin
     
     protected $parentAssociationMapping = 'product_category';
     
+    protected $datagridValues = array(
+        '_sort_by' => 'product_title',
+        '_sort_order' => 'asc',
+    );
+    
     protected function configureFormFields(FormMapper $formMapper)
     {
         $instructionOptions = array('label' => 'Инструкция', 'data_class' => null, 'required' => false);

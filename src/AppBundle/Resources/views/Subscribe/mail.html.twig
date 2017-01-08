@@ -1,9 +1,9 @@
 <p>
-    <b>E-mail</b>: {{ subscribe.email }}<br/>
-    <b>Фамилия, имя, отчество</b>: {{ subscribe.name }}<br/>
-    <b>Название компании</b>: {{ subscribe.company }}<br/>
-    <b>Тип компании</b>: {% if subscribe.type is not empty %}{{ types[subscribe.type] }}{% endif %}<br/>
-    <b>Телефон</b>: {{ subscribe.phone }}<br/>
-    <b>Факс</b>: {{ subscribe.fax }}<br/>
-    <b>URL сайта</b>: {{ subscribe.url}}
+    <b>E-mail</b>: {{ subscribe.subscribeEmail }}<br/>
+    <b>Фамилия, имя, отчество</b>: {{ subscribe.subscribePerson }}<br/>
+    <b>Название компании</b>: {{ subscribe.subscribeCompany }}<br/>
+    <b>Тип компании</b>: {% if subscribe.subscribeType is not empty %}{{ types[subscribe.subscribeType] }}{% endif %}<br/>
+    <b>Телефон</b>: {{ subscribe.subscribePhone }}<br/>
+    <b>Факс</b>: {{ subscribe.subscribeFax }}<br/>
+    <b>URL сайта</b>: {{ subscribe.subscribeUrl}}
 </p>

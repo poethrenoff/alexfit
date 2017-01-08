@@ -1,0 +1,124 @@
+{% extends 'AppBundle::base.html.twig' %}
+
+{% block body %}
+    <table cellpadding="0" cellspacing="0" style="width: 100%">
+        <tr>
+            <td align="left" valign="middle" class="menu_title menu_title">
+                Корзина
+            </td>
+        </tr>
+    </table>
+    <div class="page">
+{% if cart.sum == 0 %}
+        <h2 style="text-align: center">Ваша корзина пуста!</h2>
+{% else %}
+        <table id="cart" cellpadding="3" cellspacing="0" style="width: 100%; border-collapse: collapse">
+            <tr valign="middle" style="height: 20px">
+                <td style="width: 15px; border: 1px solid #bbbbbb">
+                    <p class="c">№</p>
+                </td>
+                <td style="border: 1px solid #bbbbbb">
+                    <p class="c">Товар</p>
+                </td>
+                <td style="width: 60px; border: 1px solid #bbbbbb">
+                    <p class="c">Цена</p>
+                </td>
+                <td style="width: 60px; border: 1px solid #bbbbbb">
+                    <p class="c">Кол-во</p>
+                </td>
+                <td style="width: 60px; border: 1px solid #bbbbbb">
+                    <p class="c">Стоимость</p>
+                </td>
+            </tr>
+{% for item in cart.items %}
+            <tr valign="middle" style="height: 30px">
+                <td style="border: 1px solid #bbbbbb">
+                    <p class="r">{{ loop.index }}.</p>
+                </td>
+                <td style="border: 1px solid #bbbbbb">
+                    <p>{{ productList[item.id].productTitle }}</p>
+                </td>
+                <td style="border: 1px solid #bbbbbb" class="price">
+                    <p class="r">{{ item.price }}</p>
+                </td>
+                <td style="border: 1px solid #bbbbbb" class="quantity">
+                    <p class="r">{{ item.quantity }}</p>
+                </td>
+                <td style="border: 1px solid #bbbbbb" class="cost">
+                    <p class="r">{{ item.price * item.quantity }}</p>
+                </td>
+            </tr>
+{% endfor %}
+            <tr valign="middle" style="height: 30px">
+                <td colspan="3">
+                    <p class="r"><b>Общая сумма заказа:</b></p>
+                </td>
+                <td colspan="2" class="cost">
+                    <p class="r"><b>{{ cart.sum }} р.</b></p>
+                </td>
+            </tr>		
+        </table>
+        
+        <p class="p" style="margin-top: 20px">Пожалуйста, внимательно заполните нижеприведенную форму. Указанная информация будет использована только для контакта менеджера с Вами в ходе оформления и доставки заказа.</p>
+        
+        {{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
+
+        <table cellpadding="3" cellspacing="0" style="width: 100%; margin-top: 20px; margin-left: 40px; border-collapse: collapse">
+            <tr valign="top" style="height: 30px">
+                <td>
+                    <p><b>Ваше имя, фамилия, отчество:</b> <span class="require">*</span></p>
+                </td>
+                <td align="left">
+                    {{ form_widget(form.purchase_person) }}
+                    {{ form_errors(form.purchase_person) }}
+                </td>
+            </tr>
+            <tr valign="top" style="height: 30px">
+                <td style="width: 300px">
+                    <p><b>E-mail:</b> <span class="require">*</span></p>
+                </td>
+                <td align="left">
+                    {{ form_widget(form.purchase_email) }}
+                    {{ form_errors(form.purchase_email) }}
+                </td>
+            </tr>
+            <tr valign="top" style="height: 30px">
+                <td>
+                    <p><b>Контактные телефоны:</b> <span class="require">*</span></p>
+                </td>
+                <td align="left">
+                    {{ form_widget(form.purchase_phone) }}
+                    {{ form_errors(form.purchase_phone) }}
+                </td>
+            </tr>
+            <tr valign="top" style="height: 30px">
+                <td>
+                    <p><b>Адрес доставки:</b> <span class="require">*</span></p>
+                </td>
+                <td align="left" class="select">
+                    {{ form_widget(form.purchase_address) }}
+                    {{ form_errors(form.purchase_address) }}
+                </td>
+            </tr>
+            <tr valign="top" style="height: 30px">
+                <td>
+                    <p><b>Комментарии к заказу:</b><br/>(удобное время доставки,<br/>сборки и пр.)</p>
+                </td>
+                <td align="left" class="select">
+                    {{ form_widget(form.purchase_comment) }}
+                    {{ form_errors(form.purchase_comment) }}
+                </td>
+            </tr>
+            <tr valign="top" style="height: 30px">
+                <td align="left">
+                    {{ form_widget(form.send) }}
+                </td>
+                <td/>
+            </tr>
+        </table>
+        {{ form_rest(form) }}
+        {{ form_end(form) }}
+
+{% endif %}
+    </div>
+{% endblock %}

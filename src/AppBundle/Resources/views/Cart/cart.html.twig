@@ -71,7 +71,7 @@
                 <td colspan="2"/>
             </tr>		
         </table>
-        <input type="button" value="Оформить" onclick="window.location.href = '{{ path('cart') }}';" class="button"/>
+        <input type="button" value="Оформить" onclick="window.location.href = '{{ path('purchase') }}';" class="button"/>
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         <input type="button" value="Очистить" onclick="if (confirm('Вы уверены, что хотите очистить корзину?')) { window.location.href = '{{ path('cart.clear') }}'; }" class="button"/>
 {% endif %}

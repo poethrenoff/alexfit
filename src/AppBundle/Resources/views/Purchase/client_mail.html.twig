@@ -1,0 +1,36 @@
+<p>Вас приветствует спортивный интернет-магазин AlexFit!</p>
+
+<p>Благодарим за Ваш заказ. Мы получили следующую информацию:</p>
+
+<p>
+{% for purchaseItem in purchase.items %}
+    {{ loop.index }}. {{ purchaseItem.itemProduct.productTitle }}: {{ purchaseItem.itemQuantity }} x {{ purchaseItem.itemPrice }} ({{ purchaseItem.itemQuantity * purchaseItem.itemPrice }} р.)<br/>
+{% endfor %}
+</p>
+
+<p>Общая стоимость заказа: {{ purchase.purchaseSum }} р.</p>
+
+<p>
+    ФИО: {{ purchase.purchasePerson }}<br/>
+    Email: {{ purchase.purchaseEmail }}<br/>
+    Телефон: {{ purchase.purchasePhone }}<br/>
+    Адрес: {{ purchase.purchaseAddress }}<br/>
+    Комментарии: {{ purchase.purchaseComment }}
+</p>
+
+<p>
+    В ближайшее время с Вами свяжется менеджер нашего магазина, чтобы уточнить время доставки и сборки товара.<br/>
+    Если Вы обнаружили неточности в оставленных Вами контактных данных, пожалуйста, позвоните нам по телефонам 8-910-405-69-91, 8-910-454-38-24.
+</p>
+
+<p>
+    С уважением<br/>
+    Интернет-магазин AlexFit<br/>
+    www.alexfit.ru<br/>
+    8-910-405-69-91, 8-910-454-38-24
+</p>
+
+<p>
+    P.S. Если заказ был оставлен не Вами и это письмо попало не по адресу, пожалуйста, сообщите об этом по адресу admin@alexfit.ru.<br/>
+    Просим прощения за беспокойство
+</p>

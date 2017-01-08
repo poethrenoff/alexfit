@@ -69,9 +69,6 @@ swiftmailer:
     host:      "%mailer_host%"
     username:  "%mailer_user%"
     password:  "%mailer_password%"
-    spool:     
-        type: file
-        path: "%kernel.root_dir%/../var/logs"
         
 # Gregwar Image Configuration
 gregwar_image:

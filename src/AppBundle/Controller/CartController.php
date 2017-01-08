@@ -19,7 +19,7 @@ class CartController extends Controller
         
         $productList = array();
         foreach ($cart->getItems() as $item ) {
-            $productList[$item->id] = $productItem = $this->getProduct($item->id);
+            $productList[$item->id] = $this->getProduct($item->id);
         }
         
         return $this->render('AppBundle::Cart/cart.html.twig', array(

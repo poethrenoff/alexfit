@@ -25,7 +25,7 @@ class Purchase
     /**
      * @var string
      * 
-     * @Assert\NotBlank()
+     * @Assert\NotBlank(message="Поле обязательно к заполнению")
      * @ORM\Column(type="string")
      */
     private $purchase_person;
@@ -33,7 +33,8 @@ class Purchase
     /**
      * @var string
      * 
-     * @Assert\NotBlank()
+     * @Assert\Email(message="Неверное значение email")
+     * @Assert\NotBlank(message="Поле обязательно к заполнению")
      * @ORM\Column(type="string")
      */
     private $purchase_email;
@@ -41,7 +42,7 @@ class Purchase
     /**
      * @var string
      * 
-     * @Assert\NotBlank()
+     * @Assert\NotBlank(message="Поле обязательно к заполнению")
      * @ORM\Column(type="string")
      */
     private $purchase_phone;
@@ -49,7 +50,7 @@ class Purchase
     /**
      * @var string
      * 
-     * @Assert\NotBlank()
+     * @Assert\NotBlank(message="Поле обязательно к заполнению")
      * @ORM\Column(type="text")
      */
     private $purchase_address;
@@ -65,7 +66,7 @@ class Purchase
      * @var date
      * 
      * @Assert\NotBlank()
-     * @ORM\Column(type="date")
+     * @ORM\Column(type="datetime")
      */
     private $purchase_date;
 
@@ -75,29 +76,31 @@ class Purchase
      * @Assert\NotBlank()
      * @ORM\Column(type="integer")
      */
-    private $purchase_sum;
+    private $purchase_sum = 0;
 
     /**
      * @var string
      * 
      * @Assert\NotBlank()
+     * @Assert\Choice({"new", "confirm", "deliver", "complete", "cancel"})
      * @ORM\Column(type="string")
      */
-    private $purchase_status;
+    private $purchase_status = 'new';
     
     /**
-     * @ORM\OneToMany(targetEntity="PurchaseItem", mappedBy="item_purchase")
+     * @ORM\OneToMany(targetEntity="PurchaseItem", mappedBy="item_purchase", cascade={"all"})
      */
     private $items;
 
     public function __construct()
     {
+        $this->purchase_date = new \DateTime();
         $this->items = new ArrayCollection();
     }
     
     public function __toString()
     {
-        return $this->getPurchaseId();
+        return 'Заказ №' . $this->getPurchaseId();
     }
 
     /**

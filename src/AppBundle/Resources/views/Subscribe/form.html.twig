@@ -20,8 +20,8 @@
                     <p><b>E-mail:</b> <span class="require">*</span><br/>(на этот адрес будет приходить прайс-лист)</p>
                 </td>
                 <td align="left">
-                    {{ form_widget(form.email) }}
-                    {{ form_errors(form.email) }}
+                    {{ form_widget(form.subscribe_email) }}
+                    {{ form_errors(form.subscribe_email) }}
                 </td>
             </tr>
             <tr valign="top" style="height: 30px">
@@ -29,8 +29,8 @@
                     <p><b>Ваше имя, фамилия, отчество:</b> <span class="require">*</span></p>
                 </td>
                 <td align="left">
-                    {{ form_widget(form.name) }}
-                    {{ form_errors(form.name) }}
+                    {{ form_widget(form.subscribe_person) }}
+                    {{ form_errors(form.subscribe_person) }}
                 </td>
             </tr>
             <tr valign="top" style="height: 30px">
@@ -38,17 +38,17 @@
                     <p><b>Название компании:</b><br/>(для юрлиц)</p>
                 </td>
                 <td align="left">
-                    {{ form_widget(form.company) }}
-                    {{ form_errors(form.company) }}
+                    {{ form_widget(form.subscribe_company) }}
+                    {{ form_errors(form.subscribe_company) }}
                 </td>
             </tr>
             <tr valign="top" style="height: 30px">
                 <td>
-                    <p><b>Тип компании:</b><br/>(для юрлиц)</p>
+                    <p><b>Тип компании:</b><br/>(для юрлиц обязательно)</p>
                 </td>
                 <td align="left" class="select">
-                    {{ form_widget(form.type) }}
-                    {{ form_errors(form.type) }}
+                    {{ form_widget(form.subscribe_type) }}
+                    {{ form_errors(form.subscribe_type) }}
                 </td>
             </tr>
 
@@ -57,8 +57,8 @@
                     <p><b>Телефон:</b><br/>(для юрлиц обязательно)</p>
                 </td>
                 <td align="left">
-                    {{ form_widget(form.phone) }}
-                    {{ form_errors(form.phone) }}
+                    {{ form_widget(form.subscribe_phone) }}
+                    {{ form_errors(form.subscribe_phone) }}
                 </td>
             </tr>
             <tr valign="top" style="height: 30px">
@@ -66,8 +66,8 @@
                     <p><b>Факс:</b><br/>(для юрлиц обязательно)</p>
                 </td>
                 <td align="left">
-                    {{ form_widget(form.fax) }}
-                    {{ form_errors(form.fax) }}
+                    {{ form_widget(form.subscribe_fax) }}
+                    {{ form_errors(form.subscribe_fax) }}
                 </td>
             </tr>
             <tr valign="top" style="height: 30px">
@@ -75,8 +75,8 @@
                     <p><b>URL сайта:</b></p>
                 </td>
                 <td align="left">
-                    {{ form_widget(form.url) }}
-                    {{ form_errors(form.url) }}
+                    {{ form_widget(form.subscribe_url) }}
+                    {{ form_errors(form.subscribe_url) }}
                 </td>
             </tr>
             <tr valign="top" style="height: 30px">
@@ -84,8 +84,8 @@
                     <p><b>Введите код с картинки:</b></p>
                 </td>
                 <td align="left">
-                    {{ form_widget(form.captcha) }}
-                    {{ form_errors(form.captcha) }}
+                    {{ form_widget(form.subscribe_captcha) }}
+                    {{ form_errors(form.subscribe_captcha) }}
                 </td>
             </tr>
             <tr valign="top" style="height: 30px">

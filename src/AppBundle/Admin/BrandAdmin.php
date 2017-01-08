@@ -8,6 +8,11 @@ use Sonata\AdminBundle\Form\FormMapper;
 
 class BrandAdmin extends AbstractAdmin
 {
+    protected $datagridValues = array(
+        '_sort_by' => 'brand_title',
+        '_sort_order' => 'ASC',
+    );
+
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper

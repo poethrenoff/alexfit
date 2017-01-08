@@ -43,7 +43,7 @@ class PurchaseItem
      * @var double
      * 
      * @Assert\NotBlank()
-     * @ORM\Column(type="decimal", precision=10, scale=2)
+     * @ORM\Column(type="integer")
      */
     private $item_price;
 
