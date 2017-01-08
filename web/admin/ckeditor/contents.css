@@ -16,6 +16,7 @@ body
 
 	/* Remove the background color to make it transparent */
 	background-color: #fff;
+    background-image: none;
 
 	margin: 20px;
 }

@@ -11,7 +11,7 @@ services:
         class: AppBundle\Admin\TextAdmin
         arguments: [~, AppBundle\Entity\Text, ~]
         tags:
-            - { name: sonata.admin, manager_type: orm, label: Тексты, group: Контент }
+            - { name: sonata.admin, manager_type: orm, label: admin.text }
         calls:
             - [ setTemplate, [edit, AppBundle:Admin:edit.html.twig]]
 
@@ -19,7 +19,7 @@ services:
         class: AppBundle\Admin\ArticleAdmin
         arguments: [~, AppBundle\Entity\Article, ~]
         tags:
-            - { name: sonata.admin, manager_type: orm, label: Статьи, group: Контент }
+            - { name: sonata.admin, manager_type: orm, label: admin.article }
         calls:
             - [ setTemplate, [edit, AppBundle:Admin:edit.html.twig]]
     
@@ -27,13 +27,13 @@ services:
         class: AppBundle\Admin\BrandAdmin
         arguments: [~, AppBundle\Entity\Brand, ~]
         tags:
-            - { name: sonata.admin, manager_type: orm, label: Производители, group: Каталог }
+            - { name: sonata.admin, manager_type: orm, label: admin.brand }
 
     admin.catalogue:
         class: AppBundle\Admin\CatalogueAdmin
         arguments: [~, AppBundle\Entity\Catalogue, ~]
         tags:
-            - { name: sonata.admin, manager_type: orm, label: Группы, group: Каталог }
+            - { name: sonata.admin, manager_type: orm, label: admin.catalogue }
         calls:
             - [ addChild, ['@admin.category'] ]
             - [ setTemplate, [edit, AppBundle:Admin:edit.html.twig]]
@@ -42,7 +42,7 @@ services:
         class: AppBundle\Admin\CategoryAdmin
         arguments: [~, AppBundle\Entity\Category, ~]
         tags:
-            - { name: sonata.admin, manager_type: orm, label: Категории, group: Каталог }
+            - { name: sonata.admin, manager_type: orm, label: admin.category }
         calls:
             - [ addChild, ['@admin.product'] ]
             - [ setTemplate, [edit, AppBundle:Admin:edit.html.twig]]
@@ -51,7 +51,7 @@ services:
         class: AppBundle\Admin\ProductAdmin
         arguments: [~, AppBundle\Entity\Product, ~]
         tags:
-            - { name: sonata.admin, manager_type: orm, label: Товары, group: Каталог }
+            - { name: sonata.admin, manager_type: orm, label: admin.product }
         calls:
             - [ addChild, ['@admin.product_picture'] ]
             - [ setTemplate, [edit, AppBundle:Admin:edit.html.twig]]
@@ -60,13 +60,13 @@ services:
         class: AppBundle\Admin\ProductPictureAdmin
         arguments: [~, AppBundle\Entity\ProductPicture, ~]
         tags:
-            - { name: sonata.admin, manager_type: orm, label: Изображения, group: Каталог }
+            - { name: sonata.admin, manager_type: orm, label: admin.product_picture }
 
     admin.purchase:
         class: AppBundle\Admin\PurchaseAdmin
         arguments: [~, AppBundle\Entity\Purchase, ~]
         tags:
-            - { name: sonata.admin, manager_type: orm, label: Заказы, group: Заказы }
+            - { name: sonata.admin, manager_type: orm, label: admin.purchase }
         calls:
             - [ addChild, ['@admin.purchase_item'] ]
             
@@ -74,10 +74,10 @@ services:
         class: AppBundle\Admin\PurchaseItemAdmin
         arguments: [~, AppBundle\Entity\PurchaseItem, ~]
         tags:
-            - { name: sonata.admin, manager_type: orm, label: Позиции, group: Заказы }
+            - { name: sonata.admin, manager_type: orm, label: admin.purchase_item }
 
     admin.preference:
         class: AppBundle\Admin\PreferenceAdmin
         arguments: [~, AppBundle\Entity\Preference, ~]
         tags:
-            - { name: sonata.admin, manager_type: orm, label: Настройки, group: Система }
+            - { name: sonata.admin, manager_type: orm, label: admin.preference }

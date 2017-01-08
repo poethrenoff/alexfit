@@ -1,14 +1,14 @@
 parameters:
-    upload_directory: '%kernel.root_dir%/../web/upload/'
+    upload_directory: '%web_dir%/upload/'
     upload_alias    : '/upload/'
     
-    product_picture_upload_directory: '%kernel.root_dir%/../web/upload/product/'
+    product_picture_upload_directory: '%web_dir%/upload/product/'
     product_picture_upload_alias    : '/upload/product/'
     
-    category_upload_directory: '%kernel.root_dir%/../web/upload/category/'
+    category_upload_directory: '%web_dir%/upload/category/'
     category_upload_alias    : '/upload/category/'
     
-    instruction_upload_directory: '%kernel.root_dir%/../web/upload/instruction/'
+    instruction_upload_directory: '%web_dir%/upload/instruction/'
     instruction_upload_alias    : '/upload/instruction/'
 
 sonata_block:
@@ -23,3 +23,43 @@ sonata_admin:
     title: 'Alexfit.ru'
     options:
         confirm_exit: false
+    
+    dashboard:
+        blocks:
+            -
+                position: left
+                type: sonata.admin.block.admin_list
+                settings:
+                    groups: [admin.group.catalogue, admin.group.purchase]
+            -
+                position: right
+                type: sonata.admin.block.admin_list
+                settings:
+                    groups: [admin.group.content, admin.group.system]
+        groups:
+            admin.group.catalogue:
+                label: admin.group.catalogue
+                label_catalogue: messages
+                items:
+                    - admin.brand
+                    - admin.catalogue
+                    - admin.category
+                    - admin.product
+                    - admin.product_picture
+            admin.group.purchase:
+                label: admin.group.purchase
+                label_catalogue: messages
+                items:
+                    - admin.purchase
+                    - admin.purchase_item
+            admin.group.content:
+                label: admin.group.content
+                label_catalogue: messages
+                items:
+                    - admin.text
+                    - admin.article
+            admin.group.system:
+                label: admin.group.system
+                label_catalogue: messages
+                items:
+                    - admin.preference

@@ -8,7 +8,7 @@ security:
             memory:
                 users:
                     admin:
-                        password: $2y$12$TybiWM2O/JQAXbuNE9MrlOTiJI2aOvIQPzugHVEgMCZYH5vkrX8mW
+                        password: '%admin_pass%'
                         roles: 'ROLE_ADMIN'
     
     encoders:

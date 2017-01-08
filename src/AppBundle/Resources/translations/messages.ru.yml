@@ -1,0 +1,15 @@
+admin.text: Тексты
+admin.article: Статьи
+admin.brand: Производители
+admin.catalogue: Группы
+admin.category: Категории
+admin.product: Товары
+admin.product_picture: Изображения
+admin.purchase: Заказы
+admin.purchase_item: Позиции
+admin.preference: Настройки
+
+admin.group.catalogue: Каталог
+admin.group.purchase: Заказы
+admin.group.content: Контент
+admin.group.system: Система
