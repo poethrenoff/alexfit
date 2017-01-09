@@ -162,8 +162,8 @@ class ConvertSchemaCommand extends DoctrineCommand
                 'product_title' => $product_item['product_name'],
                 'product_price' => $product_item['product_price'],
                 'product_price_old' => 0,
-                'product_short_desctiption' => empty($product_item['product_short_desc']) ? null : $product_item['product_short_desc'],
-                'product_full_desctiption' => empty($product_item['product_full_desc']) ? null : $product_item['product_full_desc'],
+                'product_short_description' => empty($product_item['product_short_desc']) ? null : $product_item['product_short_desc'],
+                'product_full_description' => empty($product_item['product_full_desc']) ? null : $product_item['product_full_desc'],
                 'product_instruction' => empty($product_item['product_instruct']) ? null : ($product_instruction_alias . $product_item['product_instruct']),
                 'product_active' => $product_item['product_active'],
             ));

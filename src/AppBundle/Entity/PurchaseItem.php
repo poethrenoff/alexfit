@@ -8,7 +8,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * PurchaseItem
  * 
  * @ORM\Table(name="purchase_item")
- * @ORM\Entity(repositoryClass="AppBundle\Repository\PurchaseItemRepository")
+ * @ORM\Entity
  */
 class PurchaseItem
 {
