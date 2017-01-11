@@ -33,7 +33,6 @@ class Catalogue
     /**
      * @var string
      * 
-     * @Assert\NotBlank()
      * @ORM\Column(type="string")
      */
     private $catalogue_name;

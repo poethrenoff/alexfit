@@ -1,6 +1,8 @@
 <?php
 namespace AppBundle\Admin;
 
+use AppBundle\Lib\Transliterator;
+
 trait UploadTrait
 {
     private $uploadFields = array();
@@ -40,13 +42,13 @@ trait UploadTrait
             $upload_alias = $field['upload_alias'];
             
             if (!is_null($object->$methodGetFileField())) {
-                $object->$methodGetFileField()->move(
-                    $upload_directory, $object->$methodGetFileField()->getClientOriginalName()
+                $newFileName = Transliterator::transliterate(
+                    $object->$methodGetFileField()->getClientOriginalName()
                 );
+                
+                $object->$methodGetFileField()->move($upload_directory, $newFileName);
 
-                $object->$methodSetTargetField(
-                    $upload_alias . $object->$methodGetFileField()->getClientOriginalName()
-                );
+                $object->$methodSetTargetField($upload_alias . $newFileName);
 
                 $object->$methodSetFileField(null);
             }

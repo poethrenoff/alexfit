@@ -49,7 +49,6 @@ class Category
     /**
      * @var string
      * 
-     * @Assert\NotBlank()
      * @ORM\Column(type="string")
      */
     private $category_name;
@@ -64,7 +63,6 @@ class Category
     /**
      * @var string
      * 
-     * @Assert\NotBlank()
      * @ORM\Column(type="string")
      */
     private $category_picture;

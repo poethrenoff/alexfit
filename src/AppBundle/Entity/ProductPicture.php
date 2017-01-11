@@ -31,7 +31,6 @@ class ProductPicture
     /**
      * @var string
      * 
-     * @Assert\NotBlank()
      * @ORM\Column(type="string")
      */
     private $picture_image;

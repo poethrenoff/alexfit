@@ -17,4 +17,5 @@
 /backup/
 /web/bundles/
 /web/upload/
+/.idea/
 *.*~
