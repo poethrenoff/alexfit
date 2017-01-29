@@ -2,8 +2,8 @@
 namespace AppBundle\Admin;
 
 use Sonata\AdminBundle\Admin\AbstractAdmin;
-use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
+use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\CoreBundle\Validator\ErrorElement;
 
@@ -32,7 +32,7 @@ class ArticleAdmin extends AbstractAdmin
             ->addIdentifier('article_title', null, array('label' => 'Название'))
             ->add('article_active', null, array('label' => 'Видимость', 'editable' => true));
     }
-    
+
     public function validate(ErrorElement $errorElement, $object)
     {
         $errorElement

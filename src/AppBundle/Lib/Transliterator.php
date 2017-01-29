@@ -10,7 +10,7 @@ abstract class Transliterator
         $result = $transliterator->ruToEn($text);
         
         $result = preg_replace('/\s+/', '-', $result);
-        $result = preg_replace('/[^A-z._-]/', '', $result);
+        $result = preg_replace('/[^A-z0-9._-]/', '', $result);
         $result = strtolower($result);
         
         return $result; 
