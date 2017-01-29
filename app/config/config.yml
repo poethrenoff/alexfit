@@ -74,10 +74,10 @@ swiftmailer:
         
 # Gregwar Image Configuration
 gregwar_image:
+    web_dir: "%web_dir%"
     cache_dir:  "upload/cache"
     fallback_image: "%web_dir%/image/default.gif"
     throw_exception: false
-    web_dir: "%web_dir%"
 
 # Gregwar Captcha Configuration
 gregwar_captcha:
