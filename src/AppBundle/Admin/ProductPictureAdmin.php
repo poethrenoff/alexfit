@@ -37,13 +37,6 @@ class ProductPictureAdmin extends AbstractAdmin
             ->add('picture_order', 'integer', array('label' => 'Порядок'));
     }
 
-    protected function configureDatagridFilters(DatagridMapper $datagridMapper)
-    {
-        $datagridMapper
-            ->add('picture_product', null, array('label' => 'Товар'))
-            ->add('picture_image', null, array('label' => 'Изображение'));
-    }
-
     protected function configureListFields(ListMapper $listMapper)
     {
         $listMapper

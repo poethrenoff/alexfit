@@ -25,11 +25,11 @@ class PurchaseAdmin extends AbstractAdmin
             ->add('purchase_date', 'datetime', array('label' => 'Дата'))
             ->add('purchase_sum', 'integer', array('label' => 'Сумма'))
             ->add('purchase_status', 'choice', array('label' => 'Статус', 'choices' => array(
-		'Новый' => 'new',
-		'Подтвержден' => 'confirm',
-		'В доставке' => 'deliver',
-		'Выполнен' => 'complete',
-		'Отменен' => 'cancel'
+                'Новый' => 'new',
+                'Подтвержден' => 'confirm',
+                'В доставке' => 'deliver',
+                'Выполнен' => 'complete',
+                'Отменен' => 'cancel'
             )));
     }
 
@@ -39,11 +39,11 @@ class PurchaseAdmin extends AbstractAdmin
             ->add('purchase_person', null, array('label' => 'ФИО'))
             ->add('purchase_email', null, array('label' => 'Email'))
             ->add('purchase_status', 'doctrine_orm_choice', array('label' => 'Статус'), 'choice', array('choices' => array(
-		'Новый' => 'new',
-		'Подтвержден' => 'confirm',
-		'В доставке' => 'deliver',
-		'Выполнен' => 'complete',
-		'Отменен' => 'cancel'
+                'Новый' => 'new',
+                'Подтвержден' => 'confirm',
+                'В доставке' => 'deliver',
+                'Выполнен' => 'complete',
+                'Отменен' => 'cancel'
             )));
     }
 
@@ -56,17 +56,17 @@ class PurchaseAdmin extends AbstractAdmin
             ->add('purchase_date', null, array('label' => 'Дата'))
             ->add('purchase_sum', null, array('label' => 'Сумма', 'editable' => true))
             ->add('purchase_status', 'choice', array('label' => 'Статус', 'choices' => array(
-		'new' => 'Новый',
-		'confirm' => 'Подтвержден',
-		'deliver' => 'В доставке',
-		'complete' => 'Выполнен',
-		'cancel' => 'Отменен'
+                'new' => 'Новый',
+                'confirm' => 'Подтвержден',
+                'deliver' => 'В доставке',
+                'complete' => 'Выполнен',
+                'cancel' => 'Отменен'
             ), 'editable' => true))
             ->add('_action', 'actions', array(
                 'label' => 'Операции',
                 'actions' => array(
-                    'product_item' => array('template' => 'AppBundle::Admin/purchase_item.html.twig'),
                     'edit' => array(),
+                    'product_item' => array('template' => 'AppBundle::Admin/purchase_item.html.twig'),
                 )));
     }
     

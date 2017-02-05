@@ -113,7 +113,7 @@ class CartController extends Controller
     protected function getProduct($id)
     {
         $productItem = $this->getDoctrine()->getManager()
-            ->getRepository('AppBundle:Product')->find($id);
+            ->getRepository('AppBundle:Product')->findActive($id);
 
         if (!$productItem) {
             throw new NotFoundHttpException('Страница не найдена');

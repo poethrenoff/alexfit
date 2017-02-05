@@ -10,9 +10,9 @@ namespace AppBundle\Repository;
  */
 class CatalogueRepository extends \Doctrine\ORM\EntityRepository
 {
-    public function findAll()
+    public function findAllActive()
     {
-        return $this->findBy(array('catalogue_active' => 1), array('catalogue_order' => 'asc'));;
+        return $this->findBy(array('catalogue_active' => 1), array('catalogue_order' => 'asc'));
     }
     
     public function findOneByCatalogueName($name)

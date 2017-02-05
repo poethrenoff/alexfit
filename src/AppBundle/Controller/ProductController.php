@@ -16,7 +16,7 @@ class ProductController extends Controller
     public function menuAction(Request $request)
     {
         $catalogueList = $this->getDoctrine()->getManager()
-            ->getRepository('AppBundle:Catalogue')->findAll();
+            ->getRepository('AppBundle:Catalogue')->findAllActive();
         
         return $this->render('AppBundle::Product/menu.html.twig', array(
            'catalogueList' => $catalogueList
@@ -69,7 +69,7 @@ class ProductController extends Controller
     public function productAction(Request $request, $catalogueName, $categoryName, $id)
     {
         $productItem = $this->getDoctrine()->getManager()
-            ->getRepository('AppBundle:Product')->find($id);
+            ->getRepository('AppBundle:Product')->findActive($id);
         
         if (!$productItem) {
             throw new NotFoundHttpException('Страница не найдена');
@@ -116,7 +116,7 @@ class ProductController extends Controller
     public function priceAction(Request $request)
     {
         $catalogueList = $this->getDoctrine()->getManager()
-            ->getRepository('AppBundle:Catalogue')->findAll();
+            ->getRepository('AppBundle:Catalogue')->findAllActive();
         
         return $this->render('AppBundle::Product/price.html.twig', array(
            'catalogueList' => $catalogueList

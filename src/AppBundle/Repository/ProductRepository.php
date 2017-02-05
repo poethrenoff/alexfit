@@ -12,7 +12,7 @@ use Doctrine\ORM\Tools\Pagination\Paginator;
  */
 class ProductRepository extends \Doctrine\ORM\EntityRepository
 {
-    public function find($id)
+    public function findActive($id)
     {
         return $this->findOneBy(array('product_id' => $id, 'product_active' => 1));
     }

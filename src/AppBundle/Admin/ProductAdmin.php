@@ -47,7 +47,6 @@ class ProductAdmin extends AbstractAdmin
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
         $datagridMapper
-            ->add('product_category', null, array('label' => 'Группа'))
             ->add('product_brand', null, array('label' => 'Производитель'))
             ->add('product_title', null, array('label' => 'Название'))
             ->add('product_active', null, array('label' => 'Видимость'));
