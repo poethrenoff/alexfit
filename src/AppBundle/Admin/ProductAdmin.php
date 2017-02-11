@@ -21,11 +21,6 @@ class ProductAdmin extends AbstractAdmin
     
     protected function configureFormFields(FormMapper $formMapper)
     {
-        $instructionOptions = array('label' => 'Инструкция', 'data_class' => null, 'required' => false);
-        if (($product = $this->getSubject()) && ($webPath = $product->getProductInstruction())) {
-            $instructionOptions['help'] = $webPath;
-        }
-        
         $formMapper
             ->add('product_category', 'entity', array(
                 'class' => 'AppBundle\Entity\Category',
@@ -40,7 +35,8 @@ class ProductAdmin extends AbstractAdmin
             ->add('product_price_old', 'integer', array('label' => 'Старая цена'))
             ->add('product_short_description', 'textarea', array('label' => 'Краткое описание', 'required' => false))
             ->add('product_full_description', 'textarea', array('label' => 'Подробное описание', 'required' => false, 'attr' => array('class' => 'editor')))
-            ->add('product_instruction_file', 'file', $instructionOptions)
+            ->add('product_instruction_file', 'file', array('label' => 'Инструкция', 'required' => false))
+            ->add('product_instruction', 'text', array('label' => 'Инструкция (url)', 'required' => false))
             ->add('product_active', 'checkbox', array('label' => 'Видимость', 'required' => false));
     }
 

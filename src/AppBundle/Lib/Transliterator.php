@@ -3,7 +3,7 @@ namespace AppBundle\Lib;
 
 abstract class Transliterator
 {
-    public function transliterate($text)
+    public static function transliterate($text)
     {
         $transliterator = new \Fresh\Transliteration\Transliterator();
         

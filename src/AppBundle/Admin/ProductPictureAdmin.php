@@ -22,18 +22,19 @@ class ProductPictureAdmin extends AbstractAdmin
 
     protected function configureFormFields(FormMapper $formMapper)
     {
-        $imageOptions = array('label' => 'Изображение', 'data_class' => null);
+        $imageFileOptions = array('label' => 'Изображение', 'required' => false);
+        $imageOptions = array('label' => 'Изображение (url)', 'required' => false);
         if (($subject = $this->getSubject()) && ($webPath = $subject->getPictureImage())) {
-            $imageOptions['help'] = '<img src="' . $webPath . '" style="max-width: 150px; max-height: 150px" />';;
-            $imageOptions['required'] = false;
+            $imageOptions['help'] = '<img src="' . $webPath . '" style="max-width: 150px; max-height: 150px" />';
         }
-        
+
         $formMapper
             ->add('picture_product', 'entity', array(
                 'class' => 'AppBundle\Entity\Product',
                 'label' => 'Товар'
             ))
-            ->add('picture_image_file', 'file', $imageOptions)
+            ->add('picture_image_file', 'file', $imageFileOptions)
+            ->add('picture_image', 'text', $imageOptions)
             ->add('picture_order', 'integer', array('label' => 'Порядок'));
     }
 

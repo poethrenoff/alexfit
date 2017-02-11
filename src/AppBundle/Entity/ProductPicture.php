@@ -3,6 +3,7 @@ namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Validator\Context\ExecutionContext;
 
 /**
  * ProductPicture
@@ -30,7 +31,7 @@ class ProductPicture
     
     /**
      * @var string
-     * 
+     *
      * @ORM\Column(type="string")
      */
     private $picture_image;
@@ -147,5 +148,20 @@ class ProductPicture
     public function getPictureProduct()
     {
         return $this->picture_product;
+    }
+
+    /**
+     * @Assert\Callback
+     */
+    public function validate(ExecutionContext $context, $payload)
+    {
+        if (empty($this->getPictureImage()) && empty($this->getPictureImageFile())) {
+            $context->buildViolation('Одно из полей обязательно к заполнению')
+                ->atPath('picture_image')
+                ->addViolation();
+            $context->buildViolation('Одно из полей обязательно к заполнению')
+                ->atPath('picture_image_file')
+                ->addViolation();
+        }
     }
 }

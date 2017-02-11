@@ -4,6 +4,7 @@ namespace AppBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Validator\Context\ExecutionContext;
 
 /**
  * Category
@@ -359,5 +360,20 @@ class Category
         return $this->products->filter(function($product) {
             return $product->getProductActive();
         });
+    }
+
+    /**
+     * @Assert\Callback
+     */
+    public function validate(ExecutionContext $context, $payload)
+    {
+        if (empty($this->getCategoryPicture()) && empty($this->getCategoryPictureFile())) {
+            $context->buildViolation('Одно из полей обязательно к заполнению')
+                ->atPath('category_picture')
+                ->addViolation();
+            $context->buildViolation('Одно из полей обязательно к заполнению')
+                ->atPath('category_picture_file')
+                ->addViolation();
+        }
     }
 }

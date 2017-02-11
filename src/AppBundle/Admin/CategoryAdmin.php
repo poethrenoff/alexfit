@@ -22,12 +22,12 @@ class CategoryAdmin extends AbstractAdmin
 
     protected function configureFormFields(FormMapper $formMapper)
     {
-        $pictureOptions = array('label' => 'Изображение', 'data_class' => null);
+        $imageFileOptions = array('label' => 'Изображение', 'required' => false);
+        $imageOptions = array('label' => 'Изображение (url)', 'required' => false);
         if (($subject = $this->getSubject()) && ($webPath = $subject->getCategoryPicture())) {
-            $pictureOptions['help'] = '<img src="' . $webPath . '" style="max-width: 150px; max-height: 150px" />';;
-            $pictureOptions['required'] = false;
+            $imageOptions['help'] = '<img src="' . $webPath . '" style="max-width: 150px; max-height: 150px" />';
         }
-        
+
         $formMapper
             ->add('category_catalogue', 'entity', array(
                 'class' => 'AppBundle\Entity\Catalogue',
@@ -43,7 +43,8 @@ class CategoryAdmin extends AbstractAdmin
         
         $formMapper
             ->add('category_description', 'textarea', array('label' => 'Описание', 'required' => false, 'attr' => array('class' => 'editor')))
-            ->add('category_picture_file', 'file', $pictureOptions)
+            ->add('category_picture_file', 'file', $imageFileOptions)
+            ->add('category_picture', 'text', $imageOptions)
             ->add('category_order', 'integer', array('label' => 'Порядок'))
             ->add('category_active', 'checkbox', array('label' => 'Видимость', 'required' => false));
     }
