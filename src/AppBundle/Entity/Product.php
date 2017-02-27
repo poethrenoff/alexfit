@@ -61,7 +61,6 @@ class Product
     /**
      * @var int
      * 
-     * @Assert\NotBlank()
      * @ORM\Column(type="integer")
      */
     private $product_price_old;
