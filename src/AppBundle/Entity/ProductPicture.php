@@ -25,7 +25,7 @@ class ProductPicture
     /**
      * @Assert\NotBlank()
      * @ORM\ManyToOne(targetEntity="Product",  inversedBy="pictures")
-     * @ORM\JoinColumn(name="picture_product", referencedColumnName="product_id")
+     * @ORM\JoinColumn(name="picture_product", referencedColumnName="product_id", onDelete="CASCADE")
      */
     private $picture_product;
     
