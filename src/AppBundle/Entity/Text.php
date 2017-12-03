@@ -47,7 +47,7 @@ class Text
     
     public function __toString()
     {
-        return $this->getTextTitle();
+        return (string) $this->getTextTitle();
     }
 
     /**

@@ -97,7 +97,7 @@ class Category
     
     public function __toString()
     {
-        return $this->getCategoryTitle();
+        return (string) $this->getCategoryTitle();
     }
  
     /**

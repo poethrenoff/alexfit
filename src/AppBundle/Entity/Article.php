@@ -54,7 +54,7 @@ class Article
     
     public function __toString()
     {
-        return $this->getArticleTitle();
+        return (string) $this->getArticleTitle();
     }
 
     /**

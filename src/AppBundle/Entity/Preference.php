@@ -47,7 +47,7 @@ class Preference
     
     public function __toString()
     {
-        return $this->getPreferenceTitle();
+        return (string) $this->getPreferenceTitle();
     }
 
     /**

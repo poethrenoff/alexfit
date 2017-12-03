@@ -61,7 +61,7 @@ class Product
     /**
      * @var int
      * 
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="integer", nullable=true)
      */
     private $product_price_old;
 
@@ -93,7 +93,14 @@ class Product
      * @ORM\Column(type="boolean")
      */
     private $product_active = true;
-    
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(type="boolean")
+     */
+    private $product_sale = false;
+
     /**
      * @ORM\OneToMany(targetEntity="ProductPicture", mappedBy="picture_product")
      * @ORM\OrderBy({"picture_order" = "asc"})
@@ -107,7 +114,7 @@ class Product
     
     public function __toString()
     {
-        return $this->getProductTitle();
+        return (string) $this->getProductTitle();
     }
     
     /**
@@ -409,5 +416,29 @@ class Product
     public function getProductActive()
     {
         return $this->product_active;
+    }
+
+    /**
+     * Set productSale
+     *
+     * @param boolean $productSale
+     *
+     * @return Product
+     */
+    public function setProductSale($productSale)
+    {
+        $this->product_sale = $productSale;
+
+        return $this;
+    }
+
+    /**
+     * Get productSale
+     *
+     * @return boolean
+     */
+    public function getProductSale()
+    {
+        return $this->product_sale;
     }
 }

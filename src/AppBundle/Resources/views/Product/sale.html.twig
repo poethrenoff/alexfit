@@ -1,0 +1,39 @@
+{% extends 'AppBundle::base.html.twig' %}
+
+{% block body %}
+    <table cellpadding="0" cellspacing="0" style="width: 100%">
+        <tr>
+            <td align="left" valign="middle" class="menu_title menu_title">
+                РАСПРОДАЖА
+            </td>
+        </tr>
+    </table>
+    <div class="page">
+        {{ textItem.textContent | raw }}
+        <div class="indent"></div>
+{% for productItem in productList %}
+        <div class="catalogue">
+            <div class="title">
+                <a href="{{ path('productItem', {catalogueName: productItem.productCategory.categoryCatalogue.catalogueName, categoryName: productItem.productCategory.categoryName, id: productItem.productId}) }}">{{ productItem.productTitle }}</a>
+            </div>
+            <div class="image">
+                <a href="{{ path('productItem', {catalogueName: productItem.productCategory.categoryCatalogue.catalogueName, categoryName: productItem.productCategory.categoryName, id: productItem.productId}) }}">
+                    <img src="{{ web_image(productItem.productPicture.pictureImage).cropResize(180, 180) }}" class="product" alt="{{ productItem.productTitle }}" title="{{ productItem.productTitle }}"/>
+                </a>
+            </div>
+            <div class="price">
+{% if productItem.productPrice %}
+                <b>{{ productItem.productPrice }} р.</b>
+{% if productItem.productPriceOld %}
+                <s>{{ productItem.productPriceOld }} р.</s>
+{% endif %}
+{% endif %}
+                <a href="{{ path('cart.add', {id: productItem.productId}) }}" onclick="return buyItem($(this));"><img src="/image/basket.gif" alt="Купить" title="Купить"/></a>
+            </div>
+            <div class="description">
+                {{ productItem.productShortDescription }}
+            </div>
+        </div>
+{% endfor %}
+    </div>
+{% endblock %}

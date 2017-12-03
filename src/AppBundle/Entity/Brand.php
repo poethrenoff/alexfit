@@ -38,7 +38,7 @@ class Brand
     
     public function __toString()
     {
-        return $this->getBrandTitle();
+        return (string) $this->getBrandTitle();
     }
 
     /**

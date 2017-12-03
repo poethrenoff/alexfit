@@ -72,7 +72,7 @@ class Catalogue
     
     public function __toString()
     {
-        return $this->getCatalogueTitle();
+        return (string) $this->getCatalogueTitle();
     }
 
     /**

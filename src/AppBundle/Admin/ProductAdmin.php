@@ -37,6 +37,7 @@ class ProductAdmin extends AbstractAdmin
             ->add('product_full_description', 'textarea', array('label' => 'Подробное описание', 'required' => false, 'attr' => array('class' => 'editor')))
             ->add('product_instruction_file', 'file', array('label' => 'Инструкция', 'required' => false))
             ->add('product_instruction', 'text', array('label' => 'Инструкция (url)', 'required' => false))
+            ->add('product_sale', 'checkbox', array('label' => 'Распродажа', 'required' => false))
             ->add('product_active', 'checkbox', array('label' => 'Видимость', 'required' => false));
     }
 
@@ -45,6 +46,7 @@ class ProductAdmin extends AbstractAdmin
         $datagridMapper
             ->add('product_brand', null, array('label' => 'Производитель'))
             ->add('product_title', null, array('label' => 'Название'))
+            ->add('product_sale', null, array('label' => 'Распродажа'))
             ->add('product_active', null, array('label' => 'Видимость'));
     }
 
@@ -57,6 +59,7 @@ class ProductAdmin extends AbstractAdmin
             ->addIdentifier('product_title', null, array('label' => 'Название'))
             ->add('product_price', null, array('label' => 'Цена', 'editable' => true))
             ->add('product_price_old', null, array('label' => 'Старая цена', 'editable' => true))
+            ->add('product_sale', null, array('label' => 'Распродажа', 'editable' => true))
             ->add('product_active', null, array('label' => 'Видимость', 'editable' => true))
             ->add('_action', 'actions', array(
                 'label' => 'Операции',

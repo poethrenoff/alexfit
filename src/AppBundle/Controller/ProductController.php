@@ -22,7 +22,7 @@ class ProductController extends Controller
            'catalogueList' => $catalogueList
         ));
     }
-    
+
     /**
      * Catalogue item
      * 
@@ -120,6 +120,25 @@ class ProductController extends Controller
         
         return $this->render('AppBundle::Product/price.html.twig', array(
            'catalogueList' => $catalogueList
+        ));
+    }
+
+    /**
+     * Product sale
+     *
+     * @Route("/sale", name="sale")
+     */
+    public function saleAction(Request $request)
+    {
+        $productList = $this->getDoctrine()->getManager()
+            ->getRepository('AppBundle:Product')->findBy(['product_sale' => true]);
+
+        $textItem = $this->getDoctrine()->getManager()
+            ->getRepository('AppBundle:Text')->findOneByTextName('sale');
+
+        return $this->render('AppBundle::Product/sale.html.twig', array(
+            'textItem' => $textItem,
+            'productList' => $productList,
         ));
     }
 }
