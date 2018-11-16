@@ -24,7 +24,7 @@ class ProductRepository extends \Doctrine\ORM\EntityRepository
             ->innerJoin('p.product_category', 'c')
             ->where('p.product_active = :product_active')
             ->andWhere('c.category_active = :category_active')
-            ->orderBy('p.product_price', 'asc')
+            ->orderBy('p.product_title', 'asc')
                 ->setParameter('product_active', true)
                 ->setParameter('category_active', true)
                     ->setFirstResult($offset)

@@ -86,7 +86,7 @@ class Category
     
     /**
      * @ORM\OneToMany(targetEntity="Product", mappedBy="product_category")
-     * @ORM\OrderBy({"product_price" = "asc"})
+     * @ORM\OrderBy({"product_title" = "asc"})
      */
     private $products;
 
