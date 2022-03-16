@@ -52,13 +52,16 @@
                     </div>
 
                     <div class="price">
-                        <b>Цена: {% if productItem.productPrice %}{{ productItem.productPrice }} р. {% else %}уточняйте у менеджера{% endif %}</b>
+                        <b>Цена: {% if productItem.productPrice %}{{ productItem.productPrice }} {% if productItem.productPriceInCurrency %}у.е.{% else %}р.{% endif %} {% else %}уточняйте у менеджера{% endif %}</b>
 {% if productItem.productPriceOld %}
-                        <s>{{ productItem.productPriceOld }} р.</s>
+                        <s>{{ productItem.productPriceOld }} {% if productItem.productPriceInCurrency %}у.е.{% else %}р.{% endif %}</s>
 {% endif %}
+{% if not productItem.productPriceInCurrency %}
                         <a href="{{ path('cart.add', {id: productItem.productId}) }}" onclick="return buyItem($(this));"><img src="/image/basket.gif" alt="Купить" title="Купить"/></a>
+{% else %}
+                        <div style="margin-left: 50px; text-align: center; float: left">Цены в у.е. являются справочными,<br/> уточняйте у менеджера.</div>
+{% endif %}
                     </div>
-
                     <div class="description" style="margin-top: 40px">
                         <p style="font-size: 9px; color: #743c13" class="c">НДС, доставка по Москве<br/>и сборка включены<br/>в стоимость тренажера!</p>
                     </div>

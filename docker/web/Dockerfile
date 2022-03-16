@@ -25,7 +25,7 @@ RUN echo "date.timezone = Europe/Moscow" >> /usr/local/etc/php/php.ini && \
     echo "post_max_size = 128M" >> /usr/local/etc/php/php.ini && \
     echo "upload_max_filesize = 128M" >> /usr/local/etc/php/php.ini
 
-RUN wget https://phar.phpunit.de/phpunit-8.0.phar && \
+RUN wget https://phar.phpunit.de/phpunit-8.0.phar --no-check-certificate && \
     chmod +x phpunit-8.0.phar && \
     mv phpunit-8.0.phar /usr/local/bin/phpunit
 

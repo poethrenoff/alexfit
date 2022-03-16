@@ -25,12 +25,14 @@
             </div>
             <div class="price">
 {% if productItem.productPrice %}
-                <b>{{ productItem.productPrice }} р.</b>
+                <b>{{ productItem.productPrice }} {% if productItem.productPriceInCurrency %}у.е.{% else %}р.{% endif %}</b>
 {% if productItem.productPriceOld %}
-                <s>{{ productItem.productPriceOld }} р.</s>
+                <s>{{ productItem.productPriceOld }} {% if productItem.productPriceInCurrency %}у.е.{% else %}р.{% endif %}</s>
 {% endif %}
 {% endif %}
+{% if not productItem.productPriceInCurrency %}
                 <a href="{{ path('cart.add', {id: productItem.productId}) }}" onclick="return buyItem($(this));"><img src="/image/basket.gif" alt="Купить" title="Купить"/></a>
+{% endif %}
             </div>
             <div class="description">
                 {{ productItem.productShortDescription }}

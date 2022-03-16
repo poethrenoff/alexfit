@@ -66,6 +66,13 @@ class Product
     private $product_price_old;
 
     /**
+     * @var boolean
+     *
+     * @ORM\Column(type="boolean")
+     */
+    private $product_price_in_currency = false;
+
+    /**
      * @var string
      * 
      * @ORM\Column(type="text", nullable=true)
@@ -197,6 +204,30 @@ class Product
     public function getProductPriceOld()
     {
         return $this->product_price_old;
+    }
+
+    /**
+     * Set productPriceInCurrency
+     *
+     * @param boolean $productPriceInCurrency
+     *
+     * @return Product
+     */
+    public function setProductPriceInCurrency($productPriceInCurrency)
+    {
+        $this->product_price_in_currency = $productPriceInCurrency;
+
+        return $this;
+    }
+
+    /**
+     * Get productPriceInCurrency
+     *
+     * @return boolean
+     */
+    public function getProductPriceInCurrency()
+    {
+        return $this->product_price_in_currency;
     }
 
     /**
