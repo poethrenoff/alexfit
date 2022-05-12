@@ -45,7 +45,11 @@ trait UploadTrait
                 $newFileName = Transliterator::transliterate(
                     $object->$methodGetFileField()->getClientOriginalName()
                 );
-                
+                $pathInfo = pathinfo($newFileName);
+                $extension = (isset($pathInfo['extension']) && ($pathInfo['extension'] !== '')) ?
+                    '.' . $pathInfo['extension'] : '';
+                $newFileName = $pathInfo['filename'] . '-' . time() . $extension;
+
                 $object->$methodGetFileField()->move($upload_directory, $newFileName);
 
                 $object->$methodSetTargetField($upload_alias . $newFileName);
